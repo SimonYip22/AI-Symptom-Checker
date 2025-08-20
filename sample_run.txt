@@ -1,1 +1,32 @@
-What symptom do you have? 
+# Sample Run – Day 1: Input Cleaning and Symptom Mapping
+
+## Test 1 – Basic symptom input
+User input: "Painful pee"
+Normalized: "painful urination"
+Notes: Successfully mapped lay term to canonical symptom.
+
+## Test 2 – Mixed case & spaces
+User input: "   Fever  "
+Normalized: "fever"
+Notes: Leading/trailing spaces removed, case normalized.
+
+## Test 3 – Punctuation removal
+User input: "Can't hold pee!"
+Normalized: "urinary urgency"
+Notes: Apostrophe and exclamation mark removed, lay term mapped correctly.
+
+## Test 4 – Alias with hyphen
+User input: "night-time pee"
+Normalized: "night time urination"
+Notes: Hyphen replaced with space, mapped to canonical symptom.
+
+## Test 5 – Unrecognized input
+User input: "sore arm"
+Normalized: "sore arm"
+Notes: Input not in aliases; returned as-is. Consider handling unknown symptoms later.
+
+## Reflections
+- normalize_choice_input() works as intended for common lay terms.
+- Cleaning removes punctuation, hyphens, and extra spaces.
+- Lay-term mapping ensures users can type in everyday language.
+- Need to consider how to handle unrecognized symptoms in the future.
