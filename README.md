@@ -1,2 +1,2 @@
 # AI-Symptom-Checker
-Rule-based healthcare symptom checker in Python — educational demo for portfolio
+A rule-based AI symptom checker for common medical conditions. Maps layman symptom inputs to clinically accurate terms using Python. Educational demo for portfolio
