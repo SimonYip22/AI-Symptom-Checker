@@ -1,22 +1,23 @@
 conditions = {
 
-    "Urinary Tract Infection (urine infection)": ["urinary frequency", "urinary urgency",
-                                                  "painful urination", "night time urination", 
-                                                  "blood in urine", "suprapubic pain", "fever",
-                                                  "discharge", "foul smelling urine"], 
+    "Urinary Tract Infection (urine infection)": {"urinary frequency": 3, "urinary urgency": 3,
+                                                  "painful urination": 3, "night time urination": 2, 
+                                                  "blood in urine": 2, "suprapubic pain": 1, "fever": 1,
+                                                  "discharge": 1, "foul smelling urine": 3}, 
 
-    "Influenza (flu)": ["cough", "coryza", "fever", "rigors", "fatigue",
-                        "anorexia", "headache", "myalgia", "nausea", "vomiting"],
+    "Influenza (flu)": {"cough": 3, "coryza": 1, "fever": 3, "rigors": 2, "fatigue": 3,
+                        "anorexia": 1, "headache": 1, "myalgia": 2, "nausea": 2, "vomiting": 2, "sore throat": 2},
 
-    "Gastroenteritis": ["diarrhoea", "nausea", "vomiting", "anorexia", "malaise",
-                        "fever", "bloody diarrhoea", "abdominal pain"],
-    "Otitis Media": ["ear pain", "fever", "ear discharge", "hearing loss"],
+    "Gastroenteritis (stomach bug)": {"diarrhoea": 3, "nausea": 3, "vomiting": 3, "anorexia": 3, "malaise": 1,
+                                      "fever": 1, "bloody diarrhoea": 2, "abdominal pain": 2},
 
-    "Migraine": ["nausea", "vomiting", "headache", "flashing lights", "visual defect",
-                 "photophobia", "phonophobia", "neck pain"],
+    "Otitis Media (inner ear infection)": {"ear pain": 3, "fever": 2, "ear discharge": 1, "hearing loss": 2},
 
-    "Pneumonia": ["chest pain", "shortness of breath", "cough",
-                  "purulent sputum", "blood-stained sputum", "fever"]
+    "Migraine": {"nausea": 2, "vomiting": 2, "headache": 3, "flashing lights": 3, "visual defect": 3,
+                 "photophobia": 3, "phonophobia":3, "neck pain": 1},
+
+    "Pneumonia (chest infection)": {"chest pain": 3, "shortness of breath": 3, "cough": 3,
+                                    "purulent sputum": 2, "blood stained sputum": 2, "fever": 1}
 }
 
 symptom_aliases = {
@@ -33,19 +34,20 @@ symptom_aliases = {
     "cough": ["coughing", "hacking cough"],
     "coryza": ["runny nose", "stuffy nose", "blocked nose"],
     "rigors": ["shivering", "shivers"],
-    "fatigue": ["tired", "exhausted"],
+    "fatigue": ["tired", "exhausted", "weakness"],
     "anorexia": ["loss of appetite", "not hungry", "cant eat"],
     "headache": ["head pain"],
     "myalgia": ["muscle aches", "body aches"],
     "nausea": ["feel sick", "feeling sick"],
     "vomiting": ["throwing up", "sick"],
+    "sore throat": ["painful throat", "throat hurts", "scratchy throat"],
 
     "diarrhoea": ["loose stools", "runny stools", "runny poo"],
     "malaise": ["tired", "fatigue"],
     "bloody diarrhoea": ["blood in stool", "blood in poo", "bloody stool"],
     "abdominal pain": ["stomach pain", "tummy pain"],
 
-    "ear pain": ["ear ache", "ear hurts"],
+    "ear pain": ["ear ache", "ear hurts", "earache"],
     "ear discharge": ["fluid from ear", "ear fluid"],
     "hearing loss": ["trouble hearing", "difficulty hearing", "blocked hearing"],
 
@@ -62,7 +64,7 @@ symptom_aliases = {
 }
 
 #function for cleaning the text the user inputs
-def normalize_choice_input(input_text):
+def normalise_choice_input(input_text):
     cleaned = input_text.strip().lower()
     cleaned = cleaned.replace("'", "")
     cleaned = cleaned.replace("-", " ")
@@ -74,10 +76,56 @@ def normalize_choice_input(input_text):
             return canonical
         if cleaned in aliases: #if user input matches a lay term 
             return canonical
-    return cleaned
+    return None
 
-#usage
-user_input = input("What symptom do you have? ")
-normalized = normalize_choice_input(user_input)
-print("You typed:", user_input)
-print("Canonical symptom detected:", normalized)
+
+def user_symptoms_list():
+    user_symptoms = []
+    print("Enter symptoms one by one. Type 'done' when finished.\n")
+
+    while True: #loop continues indefinitely until user types "done"
+        symptom = input("Enter a symptom: ")
+        if symptom.lower() == "done": #if done is entered then the while loop breaks
+            break 
+
+        normalised = normalise_choice_input(symptom) #each user input is cleaned by the function
+
+        if normalised is None: #if the user input flagged as invalid in the cleaning function
+            print(f"'{symptom}' not recognised as a valid symptom. Please try again. ")
+            continue #go back to start of loop, invalid inputs are ignored and not added to the list
+
+        user_symptoms.append(normalised) #adds each valid cleaned symptom into the list
+    
+    print("You have entered these symptoms: ", user_symptoms)
+    return user_symptoms
+
+
+def score_conditions(user_symptoms): 
+
+    max_symptoms = max(len(symptoms_dict) for symptoms_dict in conditions.values())
+
+    scores = {} #stores the total score for each condition as a dictionary
+    
+    for condition, symptoms_dict in conditions.items(): #loop through each condition
+
+        num_symptoms = len(symptoms_dict) #total number of symptoms for this condition
+    
+        total_possible = 0
+        for symptom, value in symptoms_dict.items(): 
+            total_possible = total_possible + value #total possible score for this condition 
+
+        total_score = 0 #start score at 0
+        for symptom in user_symptoms: #loop through every symptom the user entered in the list
+            if symptom in symptoms_dict: #check if symptom exists for this condition
+                total_score = total_score + symptoms_dict[symptom] #add the weighted score
+    
+        adjusted_score = (total_score/total_possible) * (num_symptoms/max_symptoms) #gives you the value for each condition
+        scores[condition] = adjusted_score #scores dictionary now has key = condition, value = adjusted_score
+   
+    return scores #returns score dictionary containing every condition since it is outside the loop
+
+
+if __name__ == "__main__":
+    user_input = user_symptoms_list()
+    scores = score_conditions(user_input)
+    print(scores)    

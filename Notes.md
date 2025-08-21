@@ -187,3 +187,92 @@ Lay-term mapping examples:
 	- Clinical knowledge from MBBS training
 	- Python basics (LinkedIn Learning)
 	- Notion and GitHub for documentation/logging
+
+
+# Day 2 — Scoring System  
+
+## Goals  
+- Implement a weighted scoring function (score_conditions) to rank medical conditions based on user-entered symptoms.
+- Test the function with example symptom combinations to ensure correctness and logical ranking.
+- Introduce an “adjusted score” formula to account for conditions with differing numbers of symptoms.
+
+
+
+## Goal Explanation  
+- The scoring function is the core reasoning engine of the symptom checker.
+- It transforms raw user symptom inputs into condition likelihoods by weighting symptom importance and normalizing across conditions.
+- This step moves the project from simple input handling to a tool that approximates clinical prioritization logic.
+- Adjusted scoring prevents bias toward conditions with either very few or very many symptoms.
+
+
+
+## Plan / Thoughts  
+1.	Standardize user input:
+    - Use normalise_choice_input to map user-entered symptoms to canonical symptom names.
+    - Ignore or provide feedback for unrecognized symptoms.
+2.	Define condition weights:
+    - Each condition is a dictionary: keys = canonical symptom names, values = symptom importance scores.
+3.	Score calculation:
+    - Calculate max_symptoms.
+    - Loop through each condition.
+    - For each condition:
+        - Calculate num_symptoms (total symptoms listed for that condition).
+        - Sum total_possible (sum of all symptom weights for that condition).
+        - Loop through user symptoms and add corresponding weights to total_score for matches.
+    - Calculate adjusted_score for each condition:
+
+    adjusted score for each condition = (input score/total possible score) * (number of symptoms in condition/max number of symptoms amoung all conditions)
+
+    - This normalizes scores so no single minor symptom dominates a condition with few symptoms, and conditions with more symptoms aren’t unfairly penalized.
+    - where they go:
+        1.	Before the outer loop, calculate max_symptoms.
+        2.	Inside the outer loop, calculate total_possible and num_symptoms for that condition.
+        3.	After summing total_score (your existing logic), calculate adjusted_score.
+        4.	Store adjusted_score instead of total_score in your scores dictionary.
+4.	Store results:
+	- scores[condition] = adjusted_score → dictionary maps each condition to its final score.
+5.	Testing:
+	- Manual tests with single and multiple symptom inputs.
+	- Confirm that:
+        - Conditions with matching symptoms score higher.
+        - Adjusted scoring behaves as intended.
+        - Invalid symptoms are ignored or reported without crashing.
+
+
+
+## Reflections  
+- Nested loops and dictionary handling: Iterating over multiple lists/dictionaries and accumulating values reinforced Python looping concepts.
+- Input validation and normalization: Learned the importance of preprocessing user input before scoring.
+- Adjusted scoring formula:
+    - Helps balance conditions with different numbers of symptoms.
+    - Prevents single minor symptoms from disproportionately influencing scores.
+- Function modularity:Scoring is separated from input handling and later from output display. This makes the code easier to test and extend.
+- Testing strategy:
+	- Writing test_matcher.py reinforced automated testing for edge cases (single symptom, multiple matches, invalid input, empty input).
+	- Automated tests confirmed that the scoring logic matched expectations without manually entering data every time.
+- Debugging insights:
+	- Understanding .items(), .append(), and dictionary assignments was critical for correct implementation.
+	- Learned to distinguish between accumulating a score vs storing matched items in a dictionary for reference.
+
+
+
+# Day 3: Presentation
+
+## Goals
+- Implement a function `display_results` to rank conditions based on the scores from Day 2.
+- Show which symptoms matched each condition to provide transparency.
+- Test the ranking and display with example symptom lists.
+
+## Goal Explanation / Plan
+- Take the dictionary of scores returned by score_conditions(user_symptoms).
+- Sort the conditions in descending order by score (e.g., using sorted(scores.items(), key=lambda x: x[1], reverse=True)) so the most likely conditions appear first.
+- For each condition, display which of the user-entered symptoms matched the condition’s symptom list.
+- Format the output in a readable way, e.g., showing condition name, score, and matched symptoms.
+- Keep the function modular to allow reuse or extension in future improvements.
+
+## Reflections
+- Sorting the results clearly shows the most likely conditions first, improving usability.
+- Displaying matched symptoms adds explainability to the AI logic, making it easier to justify why a condition was ranked higher.
+- Reinforced understanding of Python concepts: dictionaries, loops, sorting, string formatting, and modular function design.
+- Learned how to connect outputs from one function (score_conditions) to another (display_results) in a pipeline.
+- Considered edge cases for future improvements, e.g., no symptoms matched, tie scores, or empty input.

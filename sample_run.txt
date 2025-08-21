@@ -1,5 +1,11 @@
 # Sample Run – Day 1: Input Cleaning and Symptom Mapping
 
+##input
+user_input = input("What symptom do you have? ")
+normalised = normalise_choice_input(user_input)
+print("You typed:", user_input)
+print("Canonical symptom detected:", normalised)
+
 ## Test 1 – Basic symptom input
 User input: "Painful pee"
 Normalized: "painful urination"
