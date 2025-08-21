@@ -36,3 +36,105 @@ Notes: Input not in aliases; returned as-is. Consider handling unknown symptoms 
 - Cleaning removes punctuation, hyphens, and extra spaces.
 - Lay-term mapping ensures users can type in everyday language.
 - Need to consider how to handle unrecognized symptoms in the future.
+
+
+
+# Day 2: Scoring System
+
+## Example Run 1
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: fever
+Enter a symptom: done
+You have entered these symptoms:  ['fever']
+
+Condition scores:
+Urinary Tract Infection (urine infection): 0.043
+Influenza (flu): 0.136
+Gastroenteritis (stomach bug): 0.040
+Otitis Media (inner ear infection): 0.091
+Migraine: 0.000
+Pneumonia (chest infection): 0.039
+
+## Example Run 2
+Enter a new set of symptoms to score again.
+
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: fever
+Enter a symptom: cough
+Enter a symptom: done
+You have entered these symptoms:  ['fever', 'cough']
+
+Condition scores:
+Urinary Tract Infection (urine infection): 0.043
+Influenza (flu): 0.273
+Gastroenteritis (stomach bug): 0.040
+Otitis Media (inner ear infection): 0.091
+Migraine: 0.000
+Pneumonia (chest infection): 0.156
+
+## Example Run 3
+Enter a new set of symptoms to score again.
+
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: nausea
+Enter a symptom: vomiting
+Enter a symptom: headache
+Enter a symptom: done
+You have entered these symptoms:  ['nausea', 'vomiting', 'headache']
+
+Condition scores:
+Urinary Tract Infection (urine infection): 0.000
+Influenza (flu): 0.227
+Gastroenteritis (stomach bug): 0.242
+Otitis Media (inner ear infection): 0.000
+Migraine: 0.255
+Pneumonia (chest infection): 0.000
+
+## Example Run 4
+Enter a new set of symptoms to score again.
+
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: ear pain
+Enter a symptom: fever
+Enter a symptom: done
+You have entered these symptoms:  ['ear pain', 'fever']
+
+Condition scores:
+Urinary Tract Infection (urine infection): 0.043
+Influenza (flu): 0.136
+Gastroenteritis (stomach bug): 0.040
+Otitis Media (inner ear infection): 0.227
+Migraine: 0.000
+Pneumonia (chest infection): 0.039
+
+## Example Run 5
+Enter a new set of symptoms to score again.
+
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: done
+You have entered these symptoms:  []
+
+Condition scores:
+Urinary Tract Infection (urine infection): 0.000
+Influenza (flu): 0.000
+Gastroenteritis (stomach bug): 0.000
+Otitis Media (inner ear infection): 0.000
+Migraine: 0.000
+Pneumonia (chest infection): 0.000
+
+Enter a new set of symptoms to score again.
+
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: 
+
+##Reflection:
+Implemented the weighted scoring system to rank conditions based on user symptoms. 
+Learned how to combine user input validation, symptom alias handling, and dictionary-based scoring. 
+Practiced iterating through nested data structures and formatting output for clarity. 
+Reinforced the importance of modular functions and testing with multiple symptom scenarios.

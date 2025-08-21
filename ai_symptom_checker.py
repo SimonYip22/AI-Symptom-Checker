@@ -125,7 +125,13 @@ def score_conditions(user_symptoms):
     return scores #returns score dictionary containing every condition since it is outside the loop
 
 
-if __name__ == "__main__":
-    user_input = user_symptoms_list()
-    scores = score_conditions(user_input)
-    print(scores)    
+if __name__ == "__main__": #when you run Python from terminal __name__ is set to __main__
+    while True: #create infinite loop
+        user_input = user_symptoms_list() #asks the user for symptoms and stores them as user_input
+        scores = score_conditions(user_input) #calculates scores for each condition based on those symptoms and stores them
+
+        print("\nCondition scores:")
+        for condition, score in scores.items(): #for loop will print each output on a different line
+            print(f"{condition}: {score:.3f}") #prints the number to 3 decimal places
+
+        print("\nEnter a new set of symptoms to score again.\n")
