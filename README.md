@@ -110,3 +110,4 @@ ai-symptom-checker/
 Educational use only. Not a substitute for professional medical advice.
 Call 999 or go to A&E in emergencies.
 
+# Trigger workflow
