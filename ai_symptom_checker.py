@@ -135,3 +135,18 @@ if __name__ == "__main__": #when you run Python from terminal __name__ is set to
             print(f"{condition}: {score:.3f}") #prints the number to 3 decimal places
 
         print("\nEnter a new set of symptoms to score again.\n")
+
+
+def display_results():
+    user_input = user_symptoms_list()
+    scores = score_conditions(user_input)
+
+    sorted_conditions = sorted(scores.items(), key = lambda x: x[1], reverse=True) #turn the dictionary iterables into tuples, sort by highest value. 
+                                                                                   #lambda x is a small function that takes x as the input (x is the tuple)
+                                                                                   # x[1] is second element of the tuple (the value)
+                                                                                   #reverse=True sorts from high to low. If ommited or reverse=False then defaults to low to high
+
+    print("\nCondition scores:")
+    for condition, score in sorted_conditions:
+            matched = [s for s in user_input if s in conditions[condition]]
+            print(f"{condition}: {score:.3f} | Matched symptoms: {matched}")
