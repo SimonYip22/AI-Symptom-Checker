@@ -138,3 +138,115 @@ Implemented the weighted scoring system to rank conditions based on user symptom
 Learned how to combine user input validation, symptom alias handling, and dictionary-based scoring. 
 Practiced iterating through nested data structures and formatting output for clarity. 
 Reinforced the importance of modular functions and testing with multiple symptom scenarios.
+
+
+
+# Day 3: Presentation
+
+## Example Run 1: single symptom 
+Press Enter to start symptom checker, or type 'exit' to quit: 
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: fever
+Enter a symptom: done
+You have entered these symptoms:  ['fever']
+
+Top 3 possible conditions:
+Influenza (flu): 13.6% | Matched symptoms: ['fever']
+Otitis Media (inner ear infection): 9.1% | Matched symptoms: ['fever']
+Urinary Tract Infection (urine infection): 4.3% | Matched symptoms: ['fever']
+
+Likely diagnosis is:  Influenza (flu)
+Advice: Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,
+ Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,
+ Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,
+ Wash hands regularly with soap and water.
+Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.
+ Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
+Press Enter to start symptom checker, or type 'exit' to quit: 
+
+## Example Run 2: fever + cough
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: fever
+Enter a symptom: cough
+Enter a symptom: done
+You have entered these symptoms:  ['fever', 'cough']
+
+Top 3 possible conditions:
+Influenza (flu): 27.3% | Matched symptoms: ['fever', 'cough']
+Pneumonia (chest infection): 15.6% | Matched symptoms: ['fever', 'cough']
+Otitis Media (inner ear infection): 9.1% | Matched symptoms: ['fever']
+
+Likely diagnosis is:  Influenza (flu)
+Advice: Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,
+ Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,
+ Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,
+ Wash hands regularly with soap and water.
+Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.
+ Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
+Press Enter to start symptom checker, or type 'exit' to quit: 
+
+## Example Run 3: symptom aliases
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: high temperature
+Enter a symptom: hacking cough
+Enter a symptom: done
+You have entered these symptoms:  ['fever', 'cough']
+
+Top 3 possible conditions:
+Influenza (flu): 27.3% | Matched symptoms: ['fever', 'cough']
+Pneumonia (chest infection): 15.6% | Matched symptoms: ['fever', 'cough']
+Otitis Media (inner ear infection): 9.1% | Matched symptoms: ['fever']
+
+Likely diagnosis is:  Influenza (flu)
+Advice: Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,
+ Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,
+ Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,
+ Wash hands regularly with soap and water.
+Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.
+ Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
+Press Enter to start symptom checker, or type 'exit' to quit: 
+
+## Example Run 4: gastrointestinal symptoms
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: diarrhoea
+Enter a symptom: vomiting
+Enter a symptom: stomach pain
+Enter a symptom: done
+You have entered these symptoms:  ['diarrhoea', 'vomiting', 'abdominal pain']
+
+Top 3 possible conditions:
+Gastroenteritis (stomach bug): 32.3% | Matched symptoms: ['diarrhoea', 'vomiting', 'abdominal pain']
+Influenza (flu): 9.1% | Matched symptoms: ['vomiting']
+Migraine: 7.3% | Matched symptoms: ['vomiting']
+
+Likely diagnosis is:  Gastroenteritis (stomach bug)
+Advice: Stay at home and get plenty of rest, drink plenty of water to stay hydrated (small sips if you feel sick),
+ Try and eat when you feel able to, paracetamol +/- ibuprofen if in pain.
+Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.
+ Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
+Press Enter to start symptom checker, or type 'exit' to quit: 
+
+## Example Run 5: invalid symptoms
+Enter symptoms one by one. Type 'done' when finished.
+
+Enter a symptom: random symptom
+'random symptom' not recognised as a valid symptom. Please try again. 
+Enter a symptom: done
+You have entered these symptoms:  []
+
+Top 3 possible conditions:
+Urinary Tract Infection (urine infection): 0.0% | Matched symptoms: []
+Influenza (flu): 0.0% | Matched symptoms: []
+Gastroenteritis (stomach bug): 0.0% | Matched symptoms: []
+
+Likely diagnosis is:  Urinary Tract Infection (urine infection)
+Advice: Paracetamol +/- ibuprofen for pain relief,
+ Pharmacist or GP may prescribe a short course of antibiotics.
+Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.
+ Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
+Press Enter to start symptom checker, or type 'exit' to quit: exit
+Goodbye!

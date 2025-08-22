@@ -262,17 +262,49 @@ Lay-term mapping examples:
 - Implement a function `display_results` to rank conditions based on the scores from Day 2.
 - Show which symptoms matched each condition to provide transparency.
 - Test the ranking and display with example symptom lists.
+- Implement a simple user interface to repeatedly run the symptom checker or exit gracefully.
+
 
 ## Goal Explanation / Plan
 - Take the dictionary of scores returned by score_conditions(user_symptoms).
 - Sort the conditions in descending order by score (e.g., using sorted(scores.items(), key=lambda x: x[1], reverse=True)) so the most likely conditions appear first.
-- For each condition, display which of the user-entered symptoms matched the condition’s symptom list.
-- Format the output in a readable way, e.g., showing condition name, score, and matched symptoms.
+- For each condition, display:
+	- Condition name
+	- Percentage score (scaled from weighted symptom values)
+	- Matched symptoms from user input
+- Show only the top 3 conditions for clarity.
+- Identify the most likely diagnosis based on the highest score.
+- Display specific advice for the most likely diagnosis using the advice dictionary.
+- Finish with a safety disclaimer reminding users this is educational only.
 - Keep the function modular to allow reuse or extension in future improvements.
+- Wrap the entire interaction in a while loop so users can press Enter to start again or type “exit” to quit:
+
+                while True:
+                    command = input("Press Enter to start symptom checker, or type 'exit' to quit: ")
+                    if command.lower() == "exit":
+                        break
+                    display_results()
 
 ## Reflections
 - Sorting the results clearly shows the most likely conditions first, improving usability.
 - Displaying matched symptoms adds explainability to the AI logic, making it easier to justify why a condition was ranked higher.
 - Reinforced understanding of Python concepts: dictionaries, loops, sorting, string formatting, and modular function design.
 - Learned how to connect outputs from one function (score_conditions) to another (display_results) in a pipeline.
-- Considered edge cases for future improvements, e.g., no symptoms matched, tie scores, or empty input.
+- Learned user interface design considerations:
+    - Using input() to start or exit the program
+    - Understanding that pressing Enter returns an empty string "" that can trigger the function
+    - Avoiding confusing prompts like “Enter a new set of symptoms to score again” — pressing Enter alone suffices to restart.
+- Clarified edge cases:
+    - Empty symptom list
+    - No matched symptoms for a condition
+    - Tie scores between conditions
+- Learned to clean and normalize input with a dedicated function (normalise_choice_input) to handle aliases and user typos.
+- Practiced debugging and understanding function flow, including:
+    - Why display_results() runs after pressing Enter
+    - How to structure a repeating loop for continuous user interaction
+    - How to avoid overwriting Python keywords (continue cannot be used as a variable)
+- Clarified several confusions during implementation:
+  - Initially struggled with `sorted_conditions[0][0]`; learned this is tuple unpacking to access just the condition name.
+  - Unsure why `advice[likely_diagnosis]` worked; now understand this retrieves the advice string using the condition name as a dictionary key.
+  - Got stuck on input loop logic and prompt wording (pressing Enter vs. typing `exit`); rewrote it so the flow is intuitive for users.
+- Overall, reinforced modular design and readability, making future modifications (like adding new conditions or advice) simple.

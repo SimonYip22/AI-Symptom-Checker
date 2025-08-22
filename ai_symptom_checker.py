@@ -1,3 +1,4 @@
+
 conditions = {
 
     "Urinary Tract Infection (urine infection)": {"urinary frequency": 3, "urinary urgency": 3,
@@ -19,6 +20,7 @@ conditions = {
     "Pneumonia (chest infection)": {"chest pain": 3, "shortness of breath": 3, "cough": 3,
                                     "purulent sputum": 2, "blood stained sputum": 2, "fever": 1}
 }
+
 
 symptom_aliases = {
     "urinary frequency": ["wee a lot", "weeing a lot", "going to toilet often"],
@@ -63,6 +65,21 @@ symptom_aliases = {
     "blood stained sputum": ["coughing blood", "coughing up blood", "blood in phlegm"]
 }
 
+advice = {
+    
+          "Urinary Tract Infection (urine infection)": "Paracetamol +/- ibuprofen for pain relief,\n Pharmacist or GP may prescribe a short course of antibiotics.",
+          
+          "Influenza (flu)": "Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,\n Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,\n Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,\n Wash hands regularly with soap and water.",
+
+          "Gastroenteritis (stomach bug)": "Stay at home and get plenty of rest, drink plenty of water to stay hydrated (small sips if you feel sick),\n Try and eat when you feel able to, paracetamol +/- ibuprofen if in pain.",
+
+          "Otitis Media (inner ear infection)": "Paracetamol +/- ibuprofen for pain relief, remove any discharge by wiping ear with cotton wool,\n Do not put anything inside your ear, do not let water into ear, do not go swimming while you have an ear infection.\n Pharmacist or GP may prescribe antibiotic ear drops",
+
+          "Migraine": "Paracetamol +/- ibuprofen for pain reflief, try sleeping or laying down in a dark room during migraine,\n Pharmacist or GP may prescribe Triptans (e.g. Sumatriptan) +/- anti-sickness medication.\n Prevention: Stay hydrated and limit caffeine and alcohol intake, eat regular meals,\n avoid known triggers, get regular exercise, get plenty of sleep, manage stress.",
+
+          "Pneumonia (chest infection)": "Pharmacist or GP will prescribe antibiotics.\n Rest and drink plenty of fluids, paracetamol +/- ibuprofen for fever and pain,\n cover mouth and nose with tissue when cough or sneezing, dispose of immediately,\n Wash hands regularly with soap and water."
+}
+
 #function for cleaning the text the user inputs
 def normalise_choice_input(input_text):
     cleaned = input_text.strip().lower()
@@ -77,6 +94,7 @@ def normalise_choice_input(input_text):
         if cleaned in aliases: #if user input matches a lay term 
             return canonical
     return None
+
 
 
 def user_symptoms_list():
@@ -100,9 +118,10 @@ def user_symptoms_list():
     return user_symptoms
 
 
+
 def score_conditions(user_symptoms): 
 
-    max_symptoms = max(len(symptoms_dict) for symptoms_dict in conditions.values())
+    max_symptoms = max(len(symptoms_dict) for symptoms_dict in conditions.values()) #finds the condition with the most symptoms 
 
     scores = {} #stores the total score for each condition as a dictionary
     
@@ -125,28 +144,40 @@ def score_conditions(user_symptoms):
     return scores #returns score dictionary containing every condition since it is outside the loop
 
 
-if __name__ == "__main__": #when you run Python from terminal __name__ is set to __main__
-    while True: #create infinite loop
-        user_input = user_symptoms_list() #asks the user for symptoms and stores them as user_input
-        scores = score_conditions(user_input) #calculates scores for each condition based on those symptoms and stores them
-
-        print("\nCondition scores:")
-        for condition, score in scores.items(): #for loop will print each output on a different line
-            print(f"{condition}: {score:.3f}") #prints the number to 3 decimal places
-
-        print("\nEnter a new set of symptoms to score again.\n")
-
-
 def display_results():
-    user_input = user_symptoms_list()
-    scores = score_conditions(user_input)
+    user_symptoms = user_symptoms_list() #name the list output of the function a new variable which is outside the scope of the function
+    scores = score_conditions(user_symptoms) #input the list into the function, name the dictionary output a new variable name score
 
     sorted_conditions = sorted(scores.items(), key = lambda x: x[1], reverse=True) #turn the dictionary iterables into tuples, sort by highest value. 
                                                                                    #lambda x is a small function that takes x as the input (x is the tuple)
                                                                                    # x[1] is second element of the tuple (the value)
                                                                                    #reverse=True sorts from high to low. If ommited or reverse=False then defaults to low to high
+        
 
-    print("\nCondition scores:")
-    for condition, score in sorted_conditions:
-            matched = [s for s in user_input if s in conditions[condition]]
-            print(f"{condition}: {score:.3f} | Matched symptoms: {matched}")
+    print("\nTop 3 possible conditions:")
+    for condition, score in sorted_conditions[0:3]: #loop for each condition, we only want the top 3 though
+        matched = [s for s in user_symptoms if s in conditions[condition]] #list comprehension, take each item in the user_input list and call it s, only add s into the list comprehension if it matches a key of the symptoms dictionary
+                                                                        #'in' iterates through the keys of the symptoms dictionary for that condition
+                                                                        #Take each symptom s from the user input, but only keep it if it exists in the current condition’s symptom list.
+        
+        percentage_score = score * 100 #convert the number into a percentage
+        
+        print(f"{condition}: {percentage_score:.1f}% | Matched symptoms: {matched}") #print the percentage score to 1 dp, and also the matched symptoms list to the condition
+    
+    likely_diagnosis = sorted_conditions[0][0] #the most likely diagnosis is the condiiton with the highest score, pick the first tuple [0], then pick the first element in the first tuple [0][0]
+
+    if likely_diagnosis in advice: #if the condition is in the dictionary, print the corresponding value to the key condition that matches the likely_diagnosis
+        print("\nLikely diagnosis is: ", likely_diagnosis)
+        print("Advice:", advice[likely_diagnosis]) #we are calling the dictionary value by its key advice[likely_diagnosis]
+
+    print("Important: This tool is for educational purposes only and does not replace medical advice. If you are worried about your symptoms, please contact NHS 111.\n Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.") 
+
+
+if __name__ == "__main__": #when you run Python from terminal __name__ is set to __main__
+    while True: #create infinite loop
+        command = input("Press Enter to start symptom checker, or type 'exit' to quit: ")
+        if command.lower() == "exit":
+            print("Goodbye!")
+            break #while loop only breaks if exit is input, otherwise, display_results will run
+
+        display_results() 
