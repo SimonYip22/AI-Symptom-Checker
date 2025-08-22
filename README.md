@@ -87,14 +87,29 @@ pytest -v
 
 ## Project Structure
 
+```text
 ai-symptom-checker/
-├── 01_Miscellaneous            # Miscellaneous folders and files
-├── ai_symptom_checker.py       # Main program
-├── notes.md                    # Daily notes & reflections
-├── README.md                   # Project documentation
-├── reflection.md               # Final project reflection
-├── sample_run.txt              # Example runs
-└── test_ai_symptom_checker.py  # Automated tests
+├── .github/
+    └── workflows/
+        └── python-tests.yml
+├── 01_Miscellaneous
+├── ai_symptom_checker.py
+├── notes.md
+├── README.md
+├── reflection.md
+├── sample_run.txt
+└── test_ai_symptom_checker.py
+```
+
+Explanations:
+- .github/workflows/python-tests.yml — GitHub Actions workflow for running tests
+- 01_Miscellaneous — Miscellaneous folders and files
+- ai_symptom_checker.py — Main program
+- notes.md — Daily notes and reflections
+- README.md — Project documentation
+- reflection.md — Final project reflection
+- sample_run.txt — Example runs
+- test_ai_symptom_checker.py — Automated tests
 
 ---
 
