@@ -3,12 +3,11 @@
 ![Python](https://img.shields.io/badge/python-3.13-blue)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)    
-![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker)        
-![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker)          
-![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)          
+![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
+![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker)
+![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker)
+![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
-![Coverage](https://img.shields.io/codecov/c/github/SimonYip22/ai-symptom-checker?branch=main) 
 
 A simple **rule-based symptom checker** in Python that ranks possible medical conditions based on user-entered symptoms. Designed for educational purposes and future AI/ML expansion.
 
