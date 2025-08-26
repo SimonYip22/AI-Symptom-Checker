@@ -9,13 +9,13 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-A simple **rule-based symptom checker** in Python that ranks possible medical conditions based on user-entered symptoms. Designed for educational purposes and future AI/ML expansion.
+A simple **Python-based rule-based AI symptom checker**, a command-line tool that ranks possible medical conditions based on user-entered symptoms. Designed for educational purposes and future AI/ML expansion.
 
 ---
 
 ## TL;DR
 
-Enter symptoms one by one, and the program returns the **top 3 likely conditions** with matched symptoms and advice.
+Enter symptoms one by one, and the program returns the **top 3 likely conditions** ranked with % likelihood, and with matched symptoms, returns **most likely condition** and advice for management.
 
 ---
 
@@ -23,10 +23,11 @@ Enter symptoms one by one, and the program returns the **top 3 likely conditions
 
 - Covers 6 common primary-care conditions:
   - Urinary Tract Infection, Influenza, Gastroenteritis, Otitis Media, Migraine, Pneumonia  
-- Handles **lay-term symptom input** (e.g., "high temperature" → "fever")  
-- Weighted scoring to rank conditions by likelihood  
-- Top 3 conditions displayed with advice  
+- Input normalisation & alias mapping, so handles **lay-term symptom input** (e.g., "high temperature" → "fever")  
+- Rule-based inference with formula-weighted scoring to rank conditions by likelihood  
+- Top 3 conditions as well as most likely condition, displayed with advice  
 - Modular design for easy extension  
+- Structured clinical reasoning in a command-line interface (CLI)
 
 ---
 
@@ -118,10 +119,11 @@ Explanations:
 
 - Learned input normalization, lay-term mapping, weighted scoring, and modular function design
 - Balanced clinical accuracy with usability
-- Future improvements:
-    - Expand conditions & symptoms
-    - Integrate ML/NLP scoring
-    - Build CLI or web GUI (Streamlit)
+- Future improvements (more advanced AI techniques for MSc final project):
+  - Machine learning classifiers for automated condition ranking
+  - NLP for symptom entity recognition
+  - Bayesian inference & probabilistic reasoning
+  - Front-end UI & integration with external datasets/APIs
 
 ---
 
