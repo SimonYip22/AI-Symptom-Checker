@@ -39,6 +39,17 @@ A simple **Python-based rule-based AI symptom checker**, that allows users to en
 ---
 
 
+## Technical Highlights
+
+- **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions.
+-	**Normalization and alias mapping**: Handles human input variability.
+-	**Modular function design**: Each step (input, scoring, display) is separated, enabling future AI integration.
+-	**Scoring normalization**: Adjusts scores based on max number of symptoms per condition.
+-	**CLI-based UX**: Lightweight, fast, and easy to extend.
+
+---
+
+
 ## Architecture & Implementation
 
 **Key Components**
@@ -69,6 +80,22 @@ A simple **Python-based rule-based AI symptom checker**, that allows users to en
 7.	**Main CLI Loop (__main__)**
 	-	Continuously prompts user for input or "exit".
 	-	Runs display_results() for each session.
+
+---
+
+
+## Future Improvements
+
+- **AI/ML Integration**:
+  - Train classifiers on clinical datasets for probabilistic condition ranking.
+  - NLP for symptom extraction from free text.
+  -	Bayesian inference for probabilistic reasoning.
+-	**UI/UX Enhancements**:
+  -	Web or GUI front-end.
+  -	Real-time suggestions and auto-completion.
+-	**External Data Integration**:
+  -	Pull real-time disease prevalence data.
+  -	Connect with EHRs for personalized risk assessment.
 
 ---
 
@@ -159,33 +186,6 @@ ai-symptom-checker/
 - **reflection.md** — Final project reflection
 - **sample_run.txt** — Example runs
 - **test_ai_symptom_checker.py** — Automated tests
-
----
-
-
-## Technical Highlights
-
-- **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions.
--	**Normalization and alias mapping**: Handles human input variability.
--	**Modular function design**: Each step (input, scoring, display) is separated, enabling future AI integration.
--	**Scoring normalization**: Adjusts scores based on max number of symptoms per condition.
--	**CLI-based UX**: Lightweight, fast, and easy to extend.
-
----
-
-
-## Future Improvements
-
-- **AI/ML Integration**:
-  - Train classifiers on clinical datasets for probabilistic condition ranking.
-  - NLP for symptom extraction from free text.
-  -	Bayesian inference for probabilistic reasoning.
--	**UI/UX Enhancements**:
-  -	Web or GUI front-end.
-  -	Real-time suggestions and auto-completion.
--	**External Data Integration**:
-  -	Pull real-time disease prevalence data.
-  -	Connect with EHRs for personalized risk assessment.
 
 ---
 

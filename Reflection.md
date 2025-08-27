@@ -1,7 +1,5 @@
 # Final Reflection
 
----
-
 ## Project Overview
 
 This project implements a **rule-based AI symptom checker** for six primary-care conditions. Users enter symptoms via a **CLI**, and the program outputs **ranked conditions** based on weighted symptom scoring. Canonical medical terminology is paired with **alias mapping** to support layperson inputs while maintaining clinical precision.
