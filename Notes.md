@@ -189,6 +189,9 @@ Lay-term mapping examples:
 	- Notion and GitHub for documentation/logging
 
 
+---
+
+
 # Day 2 — Scoring System  
 
 ## Goals  
@@ -255,6 +258,8 @@ Lay-term mapping examples:
 	- Learned to distinguish between accumulating a score vs storing matched items in a dictionary for reference.
 
 
+---
+
 
 # Day 3: Presentation
 
@@ -308,3 +313,6 @@ Lay-term mapping examples:
   - Unsure why `advice[likely_diagnosis]` worked; now understand this retrieves the advice string using the condition name as a dictionary key.
   - Got stuck on input loop logic and prompt wording (pressing Enter vs. typing `exit`); rewrote it so the flow is intuitive for users.
 - Overall, reinforced modular design and readability, making future modifications (like adding new conditions or advice) simple.
+
+
+---
