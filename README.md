@@ -1,5 +1,6 @@
 # AI Symptom Checker 🩺
 **Python | Rule-based AI | CLI Tool**
+
 ![Python](https://img.shields.io/badge/python-3.13-blue)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![License](https://img.shields.io/badge/license-MIT-green)
