@@ -1,5 +1,5 @@
 # AI Symptom Checker 🩺
-
+**Python | Rule-based AI | CLI Tool**
 ![Python](https://img.shields.io/badge/python-3.13-blue)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -9,32 +9,72 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-A simple **Python-based rule-based AI symptom checker**, a command-line tool that ranks possible medical conditions based on user-entered symptoms. Designed for educational purposes and future AI/ML expansion.
+A simple **Python-based rule-based AI symptom checker**, that allows users to enter symptoms via a **command-line interface** and returns the most likely conditions along with advice for management of the most likely condition. Designed for educational purposes and future AI/ML expansion.
 
 ---
+
 
 ## TL;DR
 
-Enter symptoms one by one, and the program returns the **top 3 likely conditions** ranked with % likelihood, and with matched symptoms, returns **most likely condition** and advice for management.
+- Enter symptoms one by one.
+- Program returns **top 3 likely conditions** ranked by percentage likelihood, with matched symptoms.
+- Displays the **most likely condition** with matched symptoms and management advice.
+- Modular design for easy extension, integration of AI/ML, and data persistence.
 
 ---
 
+
 ## Features
 
-- Covers 6 common primary-care conditions:
-  - Urinary Tract Infection, Influenza, Gastroenteritis, Otitis Media, Migraine, Pneumonia  
+- **Covers 6 common primary-care conditions**: Urinary Tract Infection, Influenza, Gastroenteritis, Otitis Media, Migraine, Pneumonia  
 - Input normalisation & alias mapping, so handles **lay-term symptom input** (e.g., "high temperature" → "fever")  
-- Rule-based inference with formula-weighted scoring to rank conditions by likelihood  
-- Top 3 conditions as well as most likely condition, displayed with advice  
-- Modular design for easy extension  
-- Structured clinical reasoning in a command-line interface (CLI)
+- **Rule-based weighted scoring**:
+  - Each symptom has a weight per condition.
+  - Top 3 conditions ranked based on normalized and adjusted scores.
+- Modular CLI interface for quick testing and future integration.
+- Advice dictionary provides condition-specific management guidance.
+- Fully extendable to incorporate AI/ML models or probabilistic reasoning.
+
+---
+
+
+## Architecture & Implementation
+
+**Key Components**
+1.	**Conditions Dictionary**
+	- Maps each condition to its symptoms and weighted scores.
+	- **Example**: "Urinary Tract Infection": {"urinary frequency": 3, "blood in urine": 2, ...}
+2.	**Symptom Aliases**
+	-	Handles layman terms for symptoms.
+	-	**Example**: "wee a lot" → "urinary frequency"
+3.	**Input Normalization (normalise_choice_input)**
+	-	Cleans text inputs (lowercase, remove punctuation).
+	-	Maps aliases to canonical symptom names.
+	-	Returns None for unrecognised symptoms.
+4.	**User Input Collection (user_symptoms_list)**
+	-	Prompts the user to enter symptoms until "done".
+	-	Normalizes input using normalise_choice_input.
+	-	Returns validated symptom list.
+5.	**Scoring Function (score_conditions)**
+	-	Iterates through all conditions.
+	-	Computes weighted scores for matched symptoms.
+	-	Adjusts scores for condition length vs max symptoms.
+	-	Returns a dictionary of normalized condition scores.
+6.	**Display Results (display_results)**
+	-	Sorts conditions by score.
+	-	Displays top 3 conditions with percentage scores and matched symptoms.
+	-	Prints likely diagnosis with advice.
+	-	Includes educational disclaimer.
+7.	**Main CLI Loop (__main__)**
+	-	Continuously prompts user for input or "exit".
+	-	Runs display_results() for each session.
 
 ---
 
 
 ## Quick Start
 
-Clone repo and run:
+**Clone repo and run**:
 
 ```bash
 git clone https://github.com/SimonYip22/ai-symptom-checker.git
@@ -53,6 +93,8 @@ python ai_symptom_checker.py
 ## Example session
 
 ```text
+Press Enter to start symptom checker, or type 'exit' to quit: 
+
 Enter a symptom: diarrhoea
 Enter a symptom: vomiting
 Enter a symptom: stomach pain
@@ -77,11 +119,16 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 
 ## Running Tests
 
-Test the scoring logic and alias handling:
+**Test the scoring logic and alias handling**:
 
 ```bash
 pytest -v
 ```
+**Tests include:**
+- Weighted scoring correctness
+- Symptom alias normalization
+- Handling unrecognized inputs
+- Top-3 ranking validation
 
 ---
 
@@ -102,32 +149,49 @@ ai-symptom-checker/
 └── test_ai_symptom_checker.py
 ```
 
-Explanations:
-- .github/workflows/python-tests.yml — GitHub Actions workflow for running tests
-- 01_Miscellaneous — Miscellaneous folders and files
-- ai_symptom_checker.py — Main program
-- notes.md — Daily notes and reflections
-- README.md — Project documentation
-- reflection.md — Final project reflection
-- sample_run.txt — Example runs
-- test_ai_symptom_checker.py — Automated tests
+**Explanations**:
+- **.github/workflows/python-tests.yml** — GitHub Actions workflow for running tests
+- **01_Miscellaneous** — Miscellaneous folders and files
+- **ai_symptom_checker.py** — Main program
+- **notes.md** — Daily notes and reflections
+- **README.md** — Project documentation
+- **reflection.md** — Final project reflection
+- **sample_run.txt** — Example runs
+- **test_ai_symptom_checker.py** — Automated tests
 
 ---
 
 
-## Reflections
+## Technical Highlights
 
-- Learned input normalization, lay-term mapping, weighted scoring, and modular function design
-- Balanced clinical accuracy with usability
-- Future improvements (more advanced AI techniques for MSc final project):
-  - Machine learning classifiers for automated condition ranking
-  - NLP for symptom entity recognition
-  - Bayesian inference & probabilistic reasoning
-  - Front-end UI & integration with external datasets/APIs
+- **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions.
+-	**Normalization and alias mapping**: Handles human input variability.
+-	**Modular function design**: Each step (input, scoring, display) is separated, enabling future AI integration.
+-	**Scoring normalization**: Adjusts scores based on max number of symptoms per condition.
+-	**CLI-based UX**: Lightweight, fast, and easy to extend.
 
 ---
+
+
+## Future Improvements
+
+- **AI/ML Integration**:
+  - Train classifiers on clinical datasets for probabilistic condition ranking.
+  - NLP for symptom extraction from free text.
+  -	Bayesian inference for probabilistic reasoning.
+-	**UI/UX Enhancements**:
+  -	Web or GUI front-end.
+  -	Real-time suggestions and auto-completion.
+-	**External Data Integration**:
+  -	Pull real-time disease prevalence data.
+  -	Connect with EHRs for personalized risk assessment.
+
+---
+
 
 ## Disclaimer
 
-Educational use only. Not a substitute for professional medical advice.
-Call 999 or go to A&E in emergencies.
+- Educational use only. 
+- Not a substitute for professional medical advice.
+- For severe, sudden, or life-threatening symptoms, contact 999/A&E immediately.
+- For non-emergency concerns, contact NHS 111.

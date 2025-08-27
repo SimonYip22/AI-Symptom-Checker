@@ -1,42 +1,68 @@
 # Final Reflection
 
+---
+
 ## Project Overview
-This project was a rule-based **symptom checker** designed to score and rank a small set of common primary care conditions. The aim was to build a transparent, modular program where users could enter symptoms, receive ranked conditions, and see which symptoms matched each condition. The scope was intentionally limited to six clinically relevant conditions to keep it understandable and medically grounded.
 
-A key differentiator was my decision to use medically precise terminology while also mapping layperson inputs to canonical symptoms. This helped maintain clinical accuracy while making the tool usable for non-medical users.
+This project implements a **rule-based AI symptom checker** for six primary-care conditions. Users enter symptoms via a **CLI**, and the program outputs **ranked conditions** based on weighted symptom scoring. Canonical medical terminology is paired with **alias mapping** to support layperson inputs while maintaining clinical precision.
 
+Key technical achievements include **weighted scoring normalization, modular function design, and transparent symptom-condition mapping**, which collectively allow future integration with AI/ML models.
 
-## What I have learnt
+---
+
+## Technical Learning Outcomes
+
 Throughout the project, I built both technical and conceptual skills:
 
-- **Python Fundamentals**: Strengthened understanding of dictionaries, loops, conditional logic, sorting, modular functions, and pipelines (connecting `score_conditions` to `display_results`).  
-- **Explainability in AI/logic systems**: Learned to provide transparency by showing which symptoms matched each condition.  
-- **Debugging & Iteration**: Faced challenges with indentation, loops, and program flow (e.g., ensuring the Enter key restarted the loop correctly).  
-- **False Starts**: Initially thought JSON was needed for storing conditions, but later realised dictionaries sufficed. Reinforced the importance of clarity and simplicity over premature optimisation.  
-- **Prompt Design & Usability**: Learned that precise wording matters; for example, “Press Enter to continue” vs. “Enter new symptoms or type exit” affected user flow.
+- **Python Programming**:
+    - Leveraged dictionaries for symptom-condition mapping with weights.
+    - Implemented modular functions (normalise_choice_input, user_symptoms_list, score_conditions, display_results) to separate concerns and maintain readability.
+    - Used loops, list comprehensions, and sorting with lambda functions to rank conditions efficiently.
+- **Rule-based Logic Design**:
+    - Developed a scoring algorithm that adjusts for the number of symptoms per condition relative to the maximum, producing normalized likelihood scores.
+    - Maintained explainability by displaying which symptoms contributed to each condition score.
+- **Data Normalization & Input Handling**:
+    - Mapped user-entered lay terms to canonical symptoms.
+    - Implemented error handling for invalid inputs.
+- **Testing & Debugging**:
+    - Wrote automated tests for alias mapping, scoring accuracy, and top-3 ranking.
+    - Resolved flow issues such as infinite loops, Enter key restarts, and proper symptom accumulation.
 
 ---
 
 ## Design Choices
-- Limited to **six primary care conditions** for clinical focus.  
-- Balanced **clinical precision** (canonical terms like “polyuria, dysuria”) with usability, opting for simpler input terms but demonstrating awareness of technical vocabulary.  
-- Chose **typed symptom input** for simplicity, despite its limitations (variations in phrasing, typos).
+
+- **Condition Scope**: Limited to six clinically common conditions for clarity and demonstration purposes.
+- **Weighted Symptoms**: Allowed finer granularity of likelihood by scoring symptom importance differently per condition.
+- **CLI vs GUI**: Chose command-line interface for simplicity and rapid iteration, enabling a professional foundation before UI development.
+- **Modularity & Extensibility**: Functions are self-contained to facilitate future ML integration, data logging, and web interface deployment.
+
+---
+
+## Challenges & Solutions
+
+- **Ambiguous Inputs**: Users could enter multiple phrasings; solved via symptom_aliases dictionary.
+- **Score Normalisation**: Adjusted scores by condition length relative to maximum symptoms to avoid bias toward conditions with more symptoms.
+- **Program Flow**: Ensured repeated sessions via infinite loop with __main__, handling user exit gracefully.
+- **Initial Over-engineering**: Considered JSON storage initially; realized Python dictionaries sufficed, simplifying development.
 
 ---
 
 ## Future Improvements
+
 Reflecting on this build, several areas for enhancement are evident:
 
-- **Input Handling**: Expand synonym mapping, handle typos, and eventually allow structured clickable symptom options to reduce user error.  
+- **Input Handling**: Expand alias mapping, integrate typo correction, and explore NLP entity recognition.
 - **Clinical Breadth**: Add more conditions, grouped by system (respiratory, neurological, gastrointestinal, etc.) and specialty (paediatrics, psychiatry, infectious disease).  
-- **User Interface**: Transition from CLI to a Streamlit or web-based app with checkboxes or dropdowns for easier UX.  
+- **AI/ML Integration**: Incorporate probabilistic or machine learning models for condition ranking using real-world datasets.
 - **Explainability & Advice**: Provide not just conditions and scores, but tailored advice for next steps, red flags, and disclaimers.  
-- **Scalability**: Evolve from simple rule-based logic into a machine learning–based system, potentially using a dataset to train and validate models.
+- **UX/UI Upgrade**: Transition to a web or Streamlit interface with clickable symptoms, real-time validation, and graphical output.
+- **Data Logging & Analytics**: Persist user inputs and outputs to CSV/JSON for trend analysis, evaluation, and model training.
 
 ---
 
 ## Key Takeaways
-1. Start simple: dictionaries and lists were sufficient; JSON or other data formats can be added later as the project scales.  
-2. Usability matters: clear instructions and prompts improve the intuitiveness of the program.  
-3. Incremental development with daily testing and reflection made the project more manageable.  
-4. This project demonstrates how **rule-based systems can form the foundation for ML approaches**, bridging from handcrafted logic to data-driven intelligence.
+1.	**Rule-based foundations** provide a transparent and extendable starting point for ML pipelines.
+2.	**Incremental testing and modular design** are critical for maintainable and scalable CLI applications.
+3.	**Balancing clinical precision with usability** ensures the tool is both accurate and approachable.
+4.	**Demonstrates technical and clinical skill convergence**, bridging Python programming, clinical reasoning, and AI readiness.
