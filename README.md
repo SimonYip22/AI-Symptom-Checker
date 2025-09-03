@@ -1,5 +1,5 @@
-# AI Symptom Checker 🩺
-**Python | Rule-based AI | CLI Tool**
+# 𝐁𝐮𝐢𝐥𝐝𝐢𝐧𝐠 𝐚 𝐑𝐮𝐥𝐞-𝐁𝐚𝐬𝐞𝐝 𝐏𝐲𝐭𝐡𝐨𝐧 𝐀𝐈 𝐒𝐲𝐦𝐩𝐭𝐨𝐦 𝐂𝐡𝐞𝐜𝐤𝐞𝐫 🧠🤖
+**Python | Rule-based AI | CLI Tool | Clinically-Informed Logic**
 
 ![Python](https://img.shields.io/badge/python-3.13-blue)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
@@ -10,31 +10,42 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-A simple **Python-based rule-based AI symptom checker**, that allows users to enter symptoms via a **command-line interface** and returns the most likely conditions along with advice for management of the most likely condition. Designed for educational purposes and future AI/ML expansion.
+A **Python-based, rule-driven AI symptom checker** designed for clinical reasoning practice and educational purposes. Users enter symptoms via a **command-line interface (CLI)**, and the program outputs the top 3 likely conditions along with matched symptoms and management advice for the most likely condition.  
+
+This project demonstrates a **clinically-informed workflow**, structured reasoning, and modular code that lays the foundation for **future AI/ML integration**.
+
 
 ---
 
 
-## TL;DR
+## Clinical & Technical Highlights
 
-- Enter symptoms one by one.
-- Program returns **top 3 likely conditions** ranked by percentage likelihood, with matched symptoms.
-- Displays the **most likely condition** with matched symptoms and management advice.
-- Modular design for easy extension, integration of AI/ML, and data persistence.
+- **Rule-based weighted scoring**: Each symptom has a weight per condition. Weighted scores simulate clinical prioritisation of symptoms per condition.  
+- **Input normalization & alias mapping**: Accepts lay terms (e.g., “high temperature” → “fever”) for realistic user input handling.  
+- **Top 3 condition ranking**: Provides probabilistic-style output using a formula-based scoring system.  
+- **Educational disclaimer**: Emphasizes safe usage and clinical context.  
+- **Advice dictionary**: provides condition-specific management guidance.
+- **Modular CLI architecture**: Each step (input collection, normalization, scoring, display) is separated for maintainability and future expansion.  
+- **Future AI/ML potential**: Easily extendable for machine learning classifiers, NLP symptom extraction, or Bayesian reasoning.
 
 ---
 
+## How It Works
 
-## Features
+1. **User Input**  
+   - Collects symptoms one at a time until “done” is entered.  
+   - Normalizes input using aliases and canonical symptom mapping.  
 
-- **Covers 6 common primary-care conditions**: Urinary Tract Infection, Influenza, Gastroenteritis, Otitis Media, Migraine, Pneumonia  
-- Input normalisation & alias mapping, so handles **lay-term symptom input** (e.g., "high temperature" → "fever")  
-- **Rule-based weighted scoring**:
-  - Each symptom has a weight per condition.
-  - Top 3 conditions ranked based on normalized and adjusted scores.
-- Modular CLI interface for quick testing and future integration.
-- Advice dictionary provides condition-specific management guidance.
-- Fully extendable to incorporate AI/ML models or probabilistic reasoning.
+2. **Scoring Engine**  
+   - Iterates over conditions and computes weighted scores for matched symptoms.  
+   - Adjusts scores relative to total possible symptoms per condition as well as total possible score.  
+   - Returns top 3 conditions ranked by normalized score.  
+
+3. **Result Display**  
+   - Prints matched symptoms and percentage likelihood for top conditions.  
+   - Provides management advice for the most likely condition.  
+   - CLI output includes clear formatting and disclaimers.
+
 
 ---
 
@@ -96,6 +107,8 @@ A simple **Python-based rule-based AI symptom checker**, that allows users to en
 -	**External Data Integration**:
   -	Pull real-time disease prevalence data.
   -	Connect with EHRs for personalized risk assessment.
+- **FastAPI Deployment**: 
+  - Wrap the CLI as an API for integration into larger systems.
 
 ---
 
