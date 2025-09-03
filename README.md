@@ -10,9 +10,17 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-A **Python-based, rule-driven AI symptom checker** designed for clinical reasoning practice and educational purposes. Users enter symptoms via a **command-line interface (CLI)**, and the program outputs the top 3 likely conditions along with matched symptoms and management advice for the most likely condition.  
+A **Python-based, rule-driven AI symptom checker** leveraging **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users enter symptoms via a **command-line interface (CLI)**, and the program outputs the top 3 likely conditions along with matched symptoms and management advice for the most likely condition.
 
-This project demonstrates a **clinically-informed workflow**, structured reasoning, and modular code that lays the foundation for **future AI/ML integration**.
+This project demonstrates a **clinically-informed workflow**, where condition-symptom mappings and formula-weighted scoring reflect real-world clinical prioritisation. The outputs are interpretable, relevant, and grounded in clinical reasoning—skills that only a clinician could encode accurately. Modular code supports **future AI/ML integration** while preserving clinically meaningful logic.
+
+
+---
+
+## System Workflow
+
+![Symptom Checker Flowchart](symptom-checker-flowchart.png)
+*Figure 1: Flowchart overview of symptom input, scoring, and output display workflow.*
 
 
 ---
@@ -21,7 +29,7 @@ This project demonstrates a **clinically-informed workflow**, structured reasoni
 ## Clinical & Technical Highlights
 
 - **Rule-based weighted scoring**: Each symptom has a weight per condition. Weighted scores simulate clinical prioritisation of symptoms per condition.  
-- **Input normalization & alias mapping**: Accepts lay terms (e.g., “high temperature” → “fever”) for realistic user input handling.  
+- **Input normalisation & alias mapping**: Accepts lay terms (e.g., “high temperature” → “fever”) for realistic user input handling.  
 - **Top 3 condition ranking**: Provides probabilistic-style output using a formula-based scoring system.  
 - **Educational disclaimer**: Emphasizes safe usage and clinical context.  
 - **Advice dictionary**: provides condition-specific management guidance.
@@ -52,10 +60,11 @@ This project demonstrates a **clinically-informed workflow**, structured reasoni
 
 ## Technical Highlights
 
-- **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions.
+- **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions. 
 -	**Normalization and alias mapping**: Handles human input variability.
 -	**Modular function design**: Each step (input, scoring, display) is separated, enabling future AI integration.
--	**Scoring normalization**: Adjusts scores based on max number of symptoms per condition.
+-	**Scoring normalisation**: Developed a scoring algorithm that accounts for total symptom scores and relative condition length: 
+`adjusted_score = (total_score / total_possible) * (num_symptoms / max_symptoms)`
 -	**CLI-based UX**: Lightweight, fast, and easy to extend.
 
 ---
@@ -70,7 +79,7 @@ This project demonstrates a **clinically-informed workflow**, structured reasoni
 2.	**Symptom Aliases**
 	-	Handles layman terms for symptoms.
 	-	**Example**: "wee a lot" → "urinary frequency"
-3.	**Input Normalization (normalise_choice_input)**
+3.	**Input Normalisation (normalise_choice_input)**
 	-	Cleans text inputs (lowercase, remove punctuation).
 	-	Maps aliases to canonical symptom names.
 	-	Returns None for unrecognised symptoms.
@@ -187,6 +196,7 @@ ai-symptom-checker/
 ├── README.md
 ├── reflection.md
 ├── sample_run.txt
+├── symptom-checker-flowchart.png
 └── test_ai_symptom_checker.py
 ```
 
@@ -198,6 +208,7 @@ ai-symptom-checker/
 - **README.md** — Project documentation
 - **reflection.md** — Final project reflection
 - **sample_run.txt** — Example runs
+- **symptom-checker-flowchart.png** - Flowchart explaining logic
 - **test_ai_symptom_checker.py** — Automated tests
 
 ---
