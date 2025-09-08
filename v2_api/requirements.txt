@@ -7,3 +7,4 @@ pydantic  # Data validation and parsing library; ensures incoming requests have 
 
 # Dev dependencies
 pytest    # Testing framework for writing and running tests
+httpx     # Required for TestClient in FastAPI/Starlette
