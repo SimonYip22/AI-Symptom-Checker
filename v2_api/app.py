@@ -11,6 +11,11 @@ from .ai_symptom_checker_v2 import score_conditions, normalise_choice_input, adv
 # Initialize FastAPI app
 app = FastAPI(title="Clinically-Informed AI Symptom Checker v2 API")
 
+# Root endpoint – optional, friendly message at base URL
+@app.get("/")
+def root():
+    return {"message": "Clinically-Informed AI Symptom Checker v2 API is running"}
+
 # Pydantic model for input
 class Symptoms(BaseModel):
     symptoms: List[str]
