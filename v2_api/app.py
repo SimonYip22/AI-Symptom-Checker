@@ -1,52 +1,47 @@
 # app.py
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
 
-# Where FastAPI lives, the bridge between HTTP requests (someone sends symptoms over the web) and my Python functions (scoring engine)
+# FastAPI imports
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 
-# Import your existing CLI functions and dictionaries
-from .ai_symptom_checker_v2 import score_conditions, normalise_choice_input, advice, conditions
+# Import your CLI functions and dictionaries **as modules in the same folder**
+from ai_symptom_checker_v2 import score_conditions, normalise_choice_input, advice, conditions
 
 # Initialize FastAPI app
 app = FastAPI(title="Clinically-Informed AI Symptom Checker v2 API")
 
-# Pydantic model for validating input
+# Pydantic model for input
 class Symptoms(BaseModel):
     symptoms: List[str]
 
-# Health check endpoint. Just tells us the API is alive.
+# Health check endpoint
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
 
-# Main endpoint to predict conditions. Send it a list of symptoms and it returns a JSON object
+# Main predict endpoint
 @app.post("/predict")
 def predict(symptoms_input: Symptoms):
-    # Normalise and filter user input
+    # Normalise input
     normalised = [normalise_choice_input(s) for s in symptoms_input.symptoms]
-    normalised = [s for s in normalised if s is not None]  # ignore unrecognised symptoms
+    normalised = [s for s in normalised if s is not None]
 
-    # Compute scores using your existing scoring function
+    # Compute scores
     scores = score_conditions(normalised)
 
-    # Get top 3 conditions
+    # Top 3 conditions
     sorted_conditions = sorted(scores.items(), key=lambda x: x[1], reverse=True)[:3]
 
     top_conditions = []
     for cond, score in sorted_conditions:
-        # Find which normalised symptoms matched this condition
         matched = [s for s in normalised if s in conditions[cond]]
         top_conditions.append({
             "condition": cond,
-            "score": f"{round(score*100, 1)}%",  # show as %
+            "score": f"{round(score*100, 1)}%",
             "matched_symptoms": matched
         })
 
-    # Most likely diagnosis
     likely_diagnosis = sorted_conditions[0][0] if sorted_conditions else None
 
     return {
