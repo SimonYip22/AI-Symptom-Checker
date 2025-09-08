@@ -1,4 +1,9 @@
-# Sample Run – Day 1: Input Cleaning and Symptom Mapping
+# 🧪 Sample Runs — Clinically-Informed AI Symptom Checker  
+This document logs **test runs** across development stages (Day 1 → Day 3), demonstrating how the tool handles user input, normalisation, scoring, and final presentation of results. Each example reflects **clinically-informed mappings** that make outputs interpretable and relevant.  
+
+---
+
+# Day 1: Input Cleaning and Symptom Mapping
 
 ##input
 user_input = input("What symptom do you have? ")
@@ -37,7 +42,7 @@ Notes: Input not in aliases; returned as-is. Consider handling unknown symptoms 
 - Lay-term mapping ensures users can type in everyday language.
 - Need to consider how to handle unrecognized symptoms in the future.
 
-
+---
 
 # Day 2: Scoring System
 
@@ -139,7 +144,7 @@ Learned how to combine user input validation, symptom alias handling, and dictio
 Practiced iterating through nested data structures and formatting output for clarity. 
 Reinforced the importance of modular functions and testing with multiple symptom scenarios.
 
-
+---
 
 # Day 3: Presentation
 
@@ -250,3 +255,50 @@ Important: This tool is for educational purposes only and does not replace medic
  Call 999 or go to A&E immediately if your symptoms are severe, sudden, or life-threatening.
 Press Enter to start symptom checker, or type 'exit' to quit: exit
 Goodbye!
+
+---
+
+# API Example Run (v2 FastAPI)
+
+POST http://127.0.0.1:8000/predict
+Payload:
+
+{
+  "symptoms": ["fever", "cough"]
+}
+
+Response:
+
+{
+  "user_symptoms": [
+    "fever",
+    "cough"
+  ],
+  "top_conditions": [
+    {
+      "condition": "Influenza (flu)",
+      "score": "27.3%",
+      "matched_symptoms": [
+        "fever",
+        "cough"
+      ]
+    },
+    {
+      "condition": "Pneumonia (chest infection)",
+      "score": "15.6%",
+      "matched_symptoms": [
+        "fever",
+        "cough"
+      ]
+    },
+    {
+      "condition": "Otitis Media (inner ear infection)",
+      "score": "9.1%",
+      "matched_symptoms": [
+        "fever"
+      ]
+    }
+  ],
+  "likely_diagnosis": "Influenza (flu)",
+  "advice": "Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,\n Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,\n Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,\n Wash hands regularly with soap and water."
+}

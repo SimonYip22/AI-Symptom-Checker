@@ -316,3 +316,40 @@ Lay-term mapping examples:
 
 
 ---
+
+
+# v2 — FastAPI / API
+
+## Goals
+- Wrap CLI symptom checker as deployable API
+- Provide JSON output for top conditions, matched symptoms, likely diagnosis, and advice
+- Keep CLI code modular and separate
+
+## Implementation
+- app.py endpoints:
+    - GET /health → API health check
+    - POST /predict → input: list of symptoms, output: JSON
+- Pydantic Symptoms model validates input
+- JSON output includes:
+    - user_symptoms (normalised)
+    - top_conditions (top 3, percentage, matched symptoms)
+    - likely_diagnosis
+    - advice
+
+## Reflections
+- API-ready JSON output makes project portfolio-ready
+- Screenshots captured:
+	1.	Swagger UI home page
+	2.	Health check response
+	3.	/predict input/output JSON
+- Demonstrates clinical + technical skill:
+    - Domain expertise encoded in weights
+	- Structured outputs for automated consumption
+	- CLI/API separation ensures modularity
+
+## Testing
+- Automated tests via pytest + httpx for endpoint validation
+- Ensures outputs consistent with v1 CLI
+
+
+---

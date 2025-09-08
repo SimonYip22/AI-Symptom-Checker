@@ -2,6 +2,9 @@
 **Python | Rule-based AI | CLI Tool | Clinically-Informed Logic**
 
 ![Python](https://img.shields.io/badge/python-3.13-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green)
+![Pydantic](https://img.shields.io/badge/Pydantic-2.11.7-orange)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-0.35.0-lightgrey)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
@@ -9,10 +12,18 @@
 ![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker)
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
+![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
+![v2](https://img.shields.io/badge/version-v2.0-blueviolet)
 
-A **Python-based, rule-driven AI symptom checker** leveraging **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users enter symptoms via a **command-line interface (CLI)**, and the program outputs the top 3 likely conditions along with matched symptoms and management advice for the most likely condition.
+A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
-This project demonstrates a **clinically-informed workflow**, where condition-symptom mappings and formula-weighted scoring reflect real-world clinical prioritisation. The outputs are interpretable, relevant, and grounded in clinical reasoning—skills that only a clinician could encode accurately. Modular code supports **future AI/ML integration** while preserving clinically meaningful logic.
+The **v2 upgrade adds a deployable API**, allowing the system to serve JSON responses for top conditions, matched symptoms, and management advice—demonstrating production-ready backend capabilities alongside the original CLI.
+
+The system outputs the **top 3 likely conditions**, including **matched symptoms** and **management advice** for the most probable diagnosis.
+
+This project demonstrates a **clinically-informed workflow**, where condition-symptom mappings and formula-weighted scoring reflect real-world clinical prioritisation. The outputs are interpretable, relevant, and grounded in clinical reasoning—skills that only a clinician could encode accurately. Modular code supports **future AI/ML integration**. 
+
+A **deployable backend** with API endpoints highlights production-readiness and makes the project recruiter-ready, showcasing both CLI and web-accessible functionality.
 
 
 ---
@@ -58,7 +69,7 @@ This project demonstrates a **clinically-informed workflow**, where condition-sy
 ---
 
 
-## Technical Highlights
+## CLI Technical Highlights
 
 - **Rule-based inference engine**: Weighted scoring allows quick adaptation for new conditions. 
 -	**Normalization and alias mapping**: Handles human input variability.
@@ -116,13 +127,11 @@ This project demonstrates a **clinically-informed workflow**, where condition-sy
 -	**External Data Integration**:
   -	Pull real-time disease prevalence data.
   -	Connect with EHRs for personalized risk assessment.
-- **FastAPI Deployment**: 
-  - Wrap the CLI as an API for integration into larger systems.
 
 ---
 
 
-## Quick Start
+## CLI Quick Start
 
 **Clone repo and run**:
 
@@ -140,7 +149,7 @@ python ai_symptom_checker.py
 ---
 
 
-## Example session
+## CLI Example session
 
 ```text
 Press Enter to start symptom checker, or type 'exit' to quit: 
@@ -166,6 +175,104 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 
 ---
 
+## v2 — API Deployment with FastAPI
+
+**Python | FastAPI | Pydantic | JSON Output**
+
+## Overview
+- CLI logic wrapped into a deployable API
+- JSON output includes:
+	- user_symptoms (normalised)
+	- top_conditions (top 3, percentage, matched symptoms)
+	- likely_diagnosis
+	- advice
+- Keeps CLI and API modularly separate for maintainability and scalability
+
+## Endpoints
+- /health → GET → API health check
+- /predict → POST → Input: list of symptoms; Output: top conditions JSON
+
+## Screenshots
+
+![Swagger UI Home](v2_api/swagger_home.png)  
+*Figure 2: FastAPI Swagger UI home page showing available endpoints.*
+
+![Swagger Health Check](v2_api/swagger_health_check.png)  
+*Figure 3: /health endpoint response confirming API is running.*
+
+![Swagger /predict Example](v2_api/swagger_predict_example.png)  
+*Figure 4: /predict endpoint example request and JSON response.*
+
+## Example POST.predict request
+
+```json
+{
+  "symptoms": ["fever", "cough"]
+}
+```
+
+## Example JSON response
+
+```json
+{
+  "user_symptoms": [
+    "fever",
+    "cough"
+  ],
+  "top_conditions": [
+    {
+      "condition": "Influenza (flu)",
+      "score": "27.3%",
+      "matched_symptoms": [
+        "fever",
+        "cough"
+      ]
+    },
+    {
+      "condition": "Pneumonia (chest infection)",
+      "score": "15.6%",
+      "matched_symptoms": [
+        "fever",
+        "cough"
+      ]
+    },
+    {
+      "condition": "Otitis Media (inner ear infection)",
+      "score": "9.1%",
+      "matched_symptoms": [
+        "fever"
+      ]
+    }
+  ],
+  "likely_diagnosis": "Influenza (flu)",
+  "advice": "Rest and sleep, keep warm, paracetamol +/- ibuprofen for fever and pain,\n Drink plenty of water to stay hydrated, stay at home and avoid contact with others to prevent spreading,\n Cover mouth and nose with tissue when cough or sneezing, dispose of immediately,\n Wash hands regularly with soap and water."
+}
+```
+
+## How to run locally
+
+```bash
+cd v2_api
+uvicorn app:app --reload
+```
+
+- Visit http://127.0.0.1:8000/docs for interactive Swagger UI
+- Test endpoints in-browser
+- View JSON responses for example inputs
+
+
+## Notes / Future Work
+- Demonstrates production-ready backend for a clinician-technologist portfolio
+- JSON outputs are easy to integrate into a frontend later if desired
+- Future improvements:
+	- Expand conditions & specialties
+	- Integrate ML/NLP for symptom extraction
+	- Deploy live on Render / Railway / Heroku
+	- Add persistent logging/analytics
+- No frontend required; API + CLI + deployment is enough for portfolio.
+
+
+---
 
 ## Running Tests
 
@@ -180,6 +287,7 @@ pytest -v
 - Handling unrecognized inputs
 - Top-3 ranking validation
 
+
 ---
 
 
@@ -187,10 +295,13 @@ pytest -v
 
 ```text
 ai-symptom-checker/
-├── .github/
-    └── workflows/
-        └── python-tests.yml
-├── 01_Miscellaneous
+├── v2_api/
+│   ├── ai_symptom_checker_v2.py
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── swagger_health_check.png
+│   ├── swagger_home.png
+│   └── swagger_predict_example.png
 ├── ai_symptom_checker.py
 ├── notes.md
 ├── README.md
@@ -201,15 +312,21 @@ ai-symptom-checker/
 ```
 
 **Explanations**:
-- **.github/workflows/python-tests.yml** — GitHub Actions workflow for running tests
-- **01_Miscellaneous** — Miscellaneous folders and files
-- **ai_symptom_checker.py** — Main program
+- **v2_api/** — Contains the FastAPI version of the symptom checker
+	- **ai_symptom_checker_v2.py** — Core logic for scoring, normalisation, and advice, adapted for API usage
+	- **app.py** — FastAPI app wrapping the core logic into /predict and /health endpoints
+	- **requirements.txt** — Python dependencies for v2 API (FastAPI, Pydantic, Uvicorn)
+	- **swagger_health_check.png** — Screenshot showing /health endpoint response
+	- **swagger_home.png** — Screenshot of the Swagger UI home page
+	- **swagger_predict_example.png** — Screenshot showing /predict example request and JSON response
+- **ai_symptom_checker.py** — Original CLI program
 - **notes.md** — Daily notes and reflections
 - **README.md** — Project documentation
 - **reflection.md** — Final project reflection
 - **sample_run.txt** — Example runs
 - **symptom-checker-flowchart.png** - Flowchart explaining logic
 - **test_ai_symptom_checker.py** — Automated tests
+
 
 ---
 
