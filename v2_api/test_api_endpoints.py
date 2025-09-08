@@ -1,7 +1,7 @@
 import httpx
 
 # Replace this with your live Render/Railway/Heroku URL
-API_URL = ""https://ai-symptom-checker-5rfb.onrender.com""
+API_URL = "https://ai-symptom-checker-5rfb.onrender.com"
 
 def test_health_endpoint():
     response = httpx.get(f"{API_URL}/health")
