@@ -20,7 +20,7 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-![Live API](https://img.shields.io/badge/Live-Render-blue) - [Try the API](https://ai-symptom-checker-5rfb.onrender.com)
+[![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-blue)](https://ai-symptom-checker-5rfb.onrender.com)
 
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
@@ -186,7 +186,7 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 ---
 
 
-## v2 — API Deployment with FastAPI (lIVE)
+## v2 — API Deployment with FastAPI (LIVE)
 
 **Python | FastAPI | Pydantic | JSON Output**
 
