@@ -4,7 +4,7 @@
 
 In clinical practice, patients often describe symptoms in lay terms that don’t map neatly onto medical terminology. This project bridges that gap by building a **Python-based, rule-driven AI symptom checker** that translates layperson input into clinically weighted diagnoses, for an initial set of **clinically-relevant conditions**. Users enter symptoms via a **CLI**, and the program outputs **ranked conditions** using a formula-weighted scoring system. Canonical medical terminology is paired with **alias mapping** to support layperson inputs while maintaining clinical precision.
 
-With the addition of **v2 FastAPI deployment (live on Render: [https://ai-symptom-checker-5rfb.onrender.com](https://ai-symptom-checker-5rfb.onrender.com))**, users can also interact via a **JSON API**, making the tool scriptable, web-accessible, and recruiter-ready. Continuous integration via **GitHub Actions** ensures the live endpoints function reliably, providing production-grade validation of `/health`, `/`, and `/predict` endpoints.
+With the addition of **v2 FastAPI deployment (live on Render: [https://ai-symptom-checker-5rfb.onrender.com/docs](https://ai-symptom-checker-5rfb.onrender.com/docs))**, users can also interact via a **JSON API**, making the tool scriptable, web-accessible, and recruiter-ready. Continuous integration via **GitHub Actions** ensures the live endpoints function reliably, providing production-grade validation of `/health`, `/`, and `/predict` endpoints.
 
 The condition-symptom mappings and scoring were **designed using clinical reasoning**, ensuring that the outputs are not just algorithmically correct but **reflect real-world medical prioritisation** of symptoms and likelihood of conditions. This makes the tool **clinically interpretable and relevant**, something a generic AI or CS student could not achieve without domain expertise.
 
@@ -44,7 +44,7 @@ Throughout this project, I built both technical and conceptual skills:
     - Implemented error handling for invalid or unrecognised inputs.
 - **FastAPI Integration & Deployment**:
     - Wrapped CLI logic into API endpoints (`/predict` and `/health`) with structured JSON output.
-    - Hosted live on **Render**: [https://ai-symptom-checker-5rfb.onrender.com](https://ai-symptom-checker-5rfb.onrender.com)
+    - Hosted live on **Render**: [https://ai-symptom-checker-5rfb.onrender.com/docs](https://ai-symptom-checker-5rfb.onrender.com/docs)
     - Documented endpoints via Swagger UI for professional usability.
 - **Testing & Debugging**:
     - Wrote automated tests for alias mapping, scoring accuracy, top-3 ranking, and API responses.

@@ -19,11 +19,11 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
-[![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-green)](https://ai-symptom-checker-5rfb.onrender.com)
+[![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-green)](https://ai-symptom-checker-5rfb.onrender.com/docs)
 
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
-The **v2 API is live on Render** ([click here to try](https://ai-symptom-checker-5rfb.onrender.com)) and continuously validated via GitHub Actions to ensure endpoints respond correctly.
+The **v2 API is live on Render** ([click here to try](https://ai-symptom-checker-5rfb.onrender.com/docs)) and continuously validated via GitHub Actions to ensure endpoints respond correctly.
 
 The **v2 upgrade adds a deployable API**, allowing the system to serve JSON responses for top conditions, matched symptoms, and management advice—demonstrating production-ready backend capabilities alongside the original CLI.
 
@@ -191,7 +191,7 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 
 ### Live Demo
 
-- Deployed API on Render: [https://ai-symptom-checker-5rfb.onrender.com](https://ai-symptom-checker-5rfb.onrender.com)
+- Deployed API on Render: [https://ai-symptom-checker-5rfb.onrender.com/docs](https://ai-symptom-checker-5rfb.onrender.com/docs)
 - API endpoints are accessible via this URL:
 
   - `GET /health` → {"status":"ok"}
