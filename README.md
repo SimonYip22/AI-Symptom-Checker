@@ -1,18 +1,23 @@
 # 𝐁𝐮𝐢𝐥𝐝𝐢𝐧𝐠 𝐚 𝐑𝐮𝐥𝐞-𝐁𝐚𝐬𝐞𝐝 𝐏𝐲𝐭𝐡𝐨𝐧 𝐀𝐈 𝐒𝐲𝐦𝐩𝐭𝐨𝐦 𝐂𝐡𝐞𝐜𝐤𝐞𝐫 🧠🤖
 **Python | Rule-based AI | CLI Tool | Clinically-Informed Logic**
 
-![Python](https://img.shields.io/badge/python-3.13-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green)
-![Pydantic](https://img.shields.io/badge/Pydantic-2.11.7-orange)
+<!-- Tech Stack -->
+![Python](https://img.shields.io/badge/python-3.13-blue) 
+![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green) 
+![Pydantic](https://img.shields.io/badge/Pydantic-2.11.7-orange) 
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-0.35.0-lightgrey)
+
+<!-- Project Status & Quality -->
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
 ![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
+
+<!-- Repository Info -->
+![License](https://img.shields.io/badge/license-MIT-green)
 ![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker)
 ![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker)
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
-![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
 
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
