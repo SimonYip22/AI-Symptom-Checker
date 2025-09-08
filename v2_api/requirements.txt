@@ -4,3 +4,6 @@
 fastapi   # The web framework that lets you turn Python functions into a REST API
 uvicorn   # ASGI server that runs the FastAPI app; handles incoming HTTP requests
 pydantic  # Data validation and parsing library; ensures incoming requests have the correct structure and types
+
+# Dev dependencies
+pytest    # Testing framework for writing and running tests

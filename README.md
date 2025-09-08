@@ -13,7 +13,6 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 ![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
-![v2](https://img.shields.io/badge/version-v2.0-blueviolet)
 
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
