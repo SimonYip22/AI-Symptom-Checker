@@ -1,4 +1,8 @@
 # app.py
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent))
+
 # Where FastAPI lives, the bridge between HTTP requests (someone sends symptoms over the web) and my Python functions (scoring engine)
 from fastapi import FastAPI
 from pydantic import BaseModel
