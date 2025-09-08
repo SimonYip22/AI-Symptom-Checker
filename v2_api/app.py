@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import List
 
 # Import your CLI functions and dictionaries **as modules in the same folder**
-from ai_symptom_checker_v2 import score_conditions, normalise_choice_input, advice, conditions
+from .ai_symptom_checker_v2 import score_conditions, normalise_choice_input, advice, conditions
 
 # Initialize FastAPI app
 app = FastAPI(title="Clinically-Informed AI Symptom Checker v2 API")
