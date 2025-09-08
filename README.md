@@ -11,6 +11,7 @@
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
 ![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
+![Live API](https://img.shields.io/badge/Live-Render-blue)
 
 <!-- Repository Info -->
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -19,7 +20,11 @@
 ![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
 ![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
+![Live API](https://img.shields.io/badge/Live-Render-blue) - [Try the API](https://ai-symptom-checker-5rfb.onrender.com)
+
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
+
+The **v2 API is live on Render** ([click here to try](https://ai-symptom-checker-5rfb.onrender.com)) and continuously validated via GitHub Actions to ensure endpoints respond correctly.
 
 The **v2 upgrade adds a deployable API**, allowing the system to serve JSON responses for top conditions, matched symptoms, and management advice—demonstrating production-ready backend capabilities alongside the original CLI.
 
@@ -177,24 +182,41 @@ Important: This tool is for educational purposes only and does not replace medic
 Press Enter to start symptom checker, or type 'exit' to quit: 
 ```
 
+
 ---
 
-## v2 — API Deployment with FastAPI
+
+## v2 — API Deployment with FastAPI (lIVE)
 
 **Python | FastAPI | Pydantic | JSON Output**
 
-## Overview
+### Live Demo
+
+- Deployed API on Render: [https://ai-symptom-checker-5rfb.onrender.com](https://ai-symptom-checker-5rfb.onrender.com)
+- API endpoints are accessible via this URL:
+
+  - `GET /health` → {"status":"ok"}
+  - `GET /` → {"message":"Clinically-Informed AI Symptom Checker v2 API is running"}
+  - `POST /predict` → JSON input list of symptoms; returns top conditions
+
+### Overview
+
 - CLI logic wrapped into a deployable API
 - JSON output includes:
-	- user_symptoms (normalised)
-	- top_conditions (top 3, percentage, matched symptoms)
-	- likely_diagnosis
-	- advice
-- Keeps CLI and API modularly separate for maintainability and scalability
+  - `user_symptoms` (normalised)
+  - `top_conditions` (top 3, percentage, matched symptoms)
+  - `likely_diagnosis`
+  - `advice`
+- CLI and API are modularly separate for maintainability and scalability
 
-## Endpoints
-- /health → GET → API health check
-- /predict → POST → Input: list of symptoms; Output: top conditions JSON
+### Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | API health check |
+| `/` | GET | Root message confirming API is running |
+| `/predict` | POST | Input: list of symptoms; Output: top conditions JSON |
+
 
 ## Screenshots
 
@@ -207,7 +229,7 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 ![Swagger /predict Example](v2_api/swagger_predict_example.png)  
 *Figure 4: /predict endpoint example request and JSON response.*
 
-## Example POST.predict request
+### Example POST `/predict` Request
 
 ```json
 {
@@ -215,7 +237,7 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 }
 ```
 
-## Example JSON response
+### Example JSON response
 
 ```json
 {
@@ -253,7 +275,52 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 }
 ```
 
-## How to run locally
+### Root Endpoint
+
+```Python
+@app.get("/")
+def root():
+    return {"message": "Clinically-Informed AI Symptom Checker v2 API is running"}
+```
+
+### API Testing / CI
+
+Automated endpoint tests are run using GitHub Actions to ensure the live deployment works correctly.
+- **Workflow file**: .github/workflows/api-tests.yml
+- Uses pytest and httpx to check endpoints against the live Render deployment.
+- **Tests include**:
+  - GET /health returns 200 and {"status":"ok"}
+	- GET / returns 200 and {"message":"Clinically-Informed AI Symptom Checker v2 API is running"}
+	- POST /predict validates correct JSON structure for sample symptoms
+
+**Example test snippet**:
+
+```Python
+import httpx
+
+API_URL = "https://ai-symptom-checker-5rfb.onrender.com"
+
+def test_health_endpoint():
+    response = httpx.get(f"{API_URL}/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+
+def test_predict_endpoint_valid():
+    payload = {"symptoms": ["fever","cough"]}
+    response = httpx.post(f"{API_URL}/predict", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "user_symptoms" in data
+    assert "top_conditions" in data
+```
+- Workflow triggers:
+  - Push to main
+  - Scheduled weekly checks
+
+This demonstrates a production-ready backend with continuous validation.
+
+
+### How to run locally
 
 ```bash
 cd v2_api
@@ -265,7 +332,7 @@ uvicorn app:app --reload
 - View JSON responses for example inputs
 
 
-## Notes / Future Work
+### Notes / Future Work
 - Demonstrates production-ready backend for a clinician-technologist portfolio
 - JSON outputs are easy to integrate into a frontend later if desired
 - Future improvements:
@@ -277,6 +344,8 @@ uvicorn app:app --reload
 
 
 ---
+
+
 
 ## Running Tests
 
@@ -299,13 +368,18 @@ pytest -v
 
 ```text
 ai-symptom-checker/
+├── .github/
+│   └── workflows/
+│       ├── api-tests.yml 
+│       └── python-tests.yml
 ├── v2_api/
 │   ├── ai_symptom_checker_v2.py
 │   ├── app.py
 │   ├── requirements.txt
 │   ├── swagger_health_check.png
 │   ├── swagger_home.png
-│   └── swagger_predict_example.png
+│   ├── swagger_predict_example.png
+│   └── test_api_endpoints.py
 ├── ai_symptom_checker.py
 ├── notes.md
 ├── README.md
@@ -316,6 +390,9 @@ ai-symptom-checker/
 ```
 
 **Explanations**:
+- **.github/workflows/**
+  - **api-tests.yml** - CI workflow that runs pytest against live Render deployment to verify /health, /, and /predict endpoints.
+  - **python-tests.yml** - CI for core Python logic and CLI tests
 - **v2_api/** — Contains the FastAPI version of the symptom checker
 	- **ai_symptom_checker_v2.py** — Core logic for scoring, normalisation, and advice, adapted for API usage
 	- **app.py** — FastAPI app wrapping the core logic into /predict and /health endpoints
@@ -323,6 +400,7 @@ ai-symptom-checker/
 	- **swagger_health_check.png** — Screenshot showing /health endpoint response
 	- **swagger_home.png** — Screenshot of the Swagger UI home page
 	- **swagger_predict_example.png** — Screenshot showing /predict example request and JSON response
+  - **test_api_endpoints.py** - Test script for the API endpoints (run both locally and via GitHub Actions)
 - **ai_symptom_checker.py** — Original CLI program
 - **notes.md** — Daily notes and reflections
 - **README.md** — Project documentation
