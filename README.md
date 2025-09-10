@@ -6,20 +6,20 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green) 
 ![Pydantic](https://img.shields.io/badge/Pydantic-2.11.7-orange) 
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-0.35.0-lightgrey)
-![Pytest](https://img.shields.io/badge/Pytest-Testing-yellow) 
-![HTTPX](https://img.shields.io/badge/HTTPX-Client-red)
 
 <!-- CI/CD & Quality -->
+![Pytest](https://img.shields.io/badge/Pytest-Testing-yellow) 
+![HTTPX](https://img.shields.io/badge/HTTPX-Client-red)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-blue)  
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
 ![API Tests](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/api-tests.yml?branch=main&label=api-tests)
-![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
 
 <!-- Deployment -->
 [![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-green)](https://ai-symptom-checker-5rfb.onrender.com/docs) 
 ![Render](https://img.shields.io/badge/Render-Deployment-purple)
 
 <!-- Repository Info -->
+![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
 ![License](https://img.shields.io/badge/License-MIT-green) 
 ![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker) 
 ![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker) 
@@ -208,13 +208,12 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 
 ## v2 — API Deployment with FastAPI (LIVE)
 
-**Python | FastAPI | Pydantic | JSON Output**
+**Python | FastAPI | Pydantic | JSON Output | Render**
 
 ### Live Demo
 
 - Deployed API on Render: [https://ai-symptom-checker-5rfb.onrender.com/docs](https://ai-symptom-checker-5rfb.onrender.com/docs)
-- API endpoints are accessible via this URL:
-
+- API endpoints:
   - `GET /health` → {"status":"ok"}
   - `GET /` → {"message":"Clinically-Informed AI Symptom Checker v2 API is running"}
   - `POST /predict` → JSON input list of symptoms; returns top conditions
@@ -238,7 +237,7 @@ Press Enter to start symptom checker, or type 'exit' to quit:
 | `/predict` | POST | Input: list of symptoms; Output: top conditions JSON |
 
 
-## Screenshots
+### API Screenshots
 
 ![Swagger UI Home](v2_api/swagger_home.png)  
 *Figure 2: FastAPI Swagger UI home page showing available endpoints.*
@@ -376,7 +375,7 @@ pytest -v
 ```
 **Tests include:**
 - Weighted scoring correctness
-- Symptom alias normalization
+- Symptom alias normalisation
 - Handling unrecognized inputs
 - Top-3 ranking validation
 
