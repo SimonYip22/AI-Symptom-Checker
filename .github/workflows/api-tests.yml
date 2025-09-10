@@ -18,19 +18,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"   # stable for FastAPI stack
+          python-version: "3.11"   # safer than 3.13 for FastAPI
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r v2_api/requirements.txt
           pip install pytest httpx
 
-      - name: Run local API tests (TestClient)
+      - name: Run API tests (local with TestClient)
         run: pytest -v v2_api/test_api_endpoints.py
 
-      - name: Run live API tests (Render deployment)
+      - name: Run Live API tests (optional)
         if: github.event_name == 'schedule'
-        env:
-          RUN_LIVE: true
-        run: pytest -v v2_api/test_api_endpoints.py
+        run: pytest -v v2_api/test_live_api.py
