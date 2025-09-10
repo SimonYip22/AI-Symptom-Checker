@@ -6,20 +6,25 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green) 
 ![Pydantic](https://img.shields.io/badge/Pydantic-2.11.7-orange) 
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-0.35.0-lightgrey)
+![Pytest](https://img.shields.io/badge/Pytest-Testing-yellow) 
+![HTTPX](https://img.shields.io/badge/HTTPX-Client-red)
 
-<!-- Project Status & Quality -->
+<!-- CI/CD & Quality -->
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-blue)  
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/python-tests.yml?branch=main)
-![Tests](https://github.com/SimonYip22/ai-symptom-checker/actions/workflows/python-tests.yml/badge.svg?branch=main)
+![API Tests](https://img.shields.io/github/actions/workflow/status/SimonYip22/ai-symptom-checker/api-tests.yml?branch=main&label=api-tests)
 ![Release](https://img.shields.io/github/v/release/SimonYip22/ai-symptom-checker)
 
-<!-- Repository Info -->
-![License](https://img.shields.io/badge/license-MIT-green)
-![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker)
-![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker)
-![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker)
-![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
+<!-- Deployment -->
+[![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-green)](https://ai-symptom-checker-5rfb.onrender.com/docs) 
+![Render](https://img.shields.io/badge/Render-Deployment-purple)
 
-[![Live Deployment](https://img.shields.io/badge/API-Live%20on%20Render-green)](https://ai-symptom-checker-5rfb.onrender.com/docs)
+<!-- Repository Info -->
+![License](https://img.shields.io/badge/License-MIT-green) 
+![Issues](https://img.shields.io/github/issues/SimonYip22/ai-symptom-checker) 
+![Forks](https://img.shields.io/github/forks/SimonYip22/ai-symptom-checker) 
+![Stars](https://img.shields.io/github/stars/SimonYip22/ai-symptom-checker) 
+![Contributors](https://img.shields.io/github/contributors/SimonYip22/ai-symptom-checker)
 
 A **Python-based, rule-driven AI symptom checker** that leverages **clinical reasoning** to interpret patient-reported symptoms and rank potential conditions. Users can interact via a **command-line interface (CLI)** **or** a **FastAPI-based JSON API (v2)**, making the tool both scriptable and deployable for web integration.
 
@@ -33,6 +38,22 @@ This project demonstrates a **clinically-informed workflow**, where condition-sy
 
 A **deployable backend** with API endpoints highlights production-readiness and makes the project recruiter-ready, showcasing both CLI and web-accessible functionality.
 
+
+---
+
+## CLI vs FastAPI: Skills Showcase
+
+| Feature | CLI (v1) | FastAPI (v2 - Live on Render) |
+|---------|-----|--------------------------|
+| **User Interaction** | Command-line symptom entry; interactive prompts | JSON API requests (`POST /predict`, `GET /health`); accessible via Swagger UI |
+| **Data Entry** | Manual typing via terminal | Scriptable input via HTTP requests or programmatic integration |
+| **Input Handling** | Normalises lay terms via aliases; prompts user interactively | Accepts JSON array of symptoms; validates via Pydantic |
+| **Output** | Ranked conditions with weighted scores, matched symptoms, likely diagnosis and advice; immediate terminal feedback | JSON responses with condition scores, matched symptoms, likely diagnosis, and advice; usable in dashboards, ML pipelines, or automated workflows |
+| **Deployment** | Local only | Live on Render; recruiter-accessible demo |
+| **Modularity** | CLI logic in single script | CLI and API code modularly separated for maintainability |
+| **Testing & CI/CD** | Pytest manual testing of scoring logic | Automated Pytest + httpx validating live API endpoints; GitHub Actions ensures continuous validation and production-ready deployment |
+| **Clinical Insight** | Symptom-condition mappings encoded via clinical reasoning | Enables integration into web apps, dashboards, and future AI/ML models |
+| **Explainability** | Shows contribution of each symptom to condition score in console | Structured JSON output retains transparency; API facilitates analytics or logging |
 
 ---
 

@@ -318,38 +318,61 @@ Lay-term mapping examples:
 ---
 
 
-# v2 — FastAPI / API
+# v2 — FastAPI / API  
 
-## Goals
-- Wrap CLI symptom checker as deployable API
-- Provide JSON output for top conditions, matched symptoms, likely diagnosis, and advice
-- Keep CLI code modular and separate
+## Goals  
+- Wrap CLI symptom checker as a deployable API.  
+- Provide structured JSON output for top conditions, matched symptoms, likely diagnosis, and advice.  
+- Keep CLI and API code modular and separate.  
+- Deploy live for recruiter accessibility and professional demonstration.  
 
-## Implementation
-- app.py endpoints:
-    - GET /health → API health check
-    - POST /predict → input: list of symptoms, output: JSON
-- Pydantic Symptoms model validates input
-- JSON output includes:
-    - user_symptoms (normalised)
-    - top_conditions (top 3, percentage, matched symptoms)
-    - likely_diagnosis
-    - advice
+---
 
-## Reflections
-- API-ready JSON output makes project portfolio-ready
-- Screenshots captured:
-	1.	Swagger UI home page
-	2.	Health check response
-	3.	/predict input/output JSON
-- Demonstrates clinical + technical skill:
-    - Domain expertise encoded in weights
-	- Structured outputs for automated consumption
-	- CLI/API separation ensures modularity
+## Implementation  
+- **Endpoints (`app.py`)**:  
+  - `GET /health` → API health check.  
+  - `POST /predict` → input: list of symptoms; output: structured JSON.  
 
-## Testing
-- Automated tests via pytest + httpx for endpoint validation
-- Ensures outputs consistent with v1 CLI
+- **Pydantic model** validates incoming symptom input.  
 
+- **JSON output includes**:  
+  - `user_symptoms` (normalised to canonical terms)  
+  - `top_conditions` (top 3 ranked, with percentage and matched symptoms)  
+  - `likely_diagnosis` (highest-ranked condition)  
+  - `advice` (condition-specific guidance + safety disclaimer)  
+
+- **Deployment**:  
+  - Hosted live on **Render** → [https://ai-symptom-checker-5rfb.onrender.com/docs](https://ai-symptom-checker-5rfb.onrender.com/docs)  
+  - Swagger UI automatically documents endpoints for usability.  
+
+---
+
+## Testing  
+- Automated tests via **pytest** + **httpx** for endpoint validation.  
+- Validates both `/health` and `/predict` endpoints.  
+- Confirms JSON structure and field presence.  
+- Ensures outputs remain **consistent with v1 CLI logic** (symptom normalisation, ranking, advice).  
+
+---
+
+## Continuous Integration (CI/CD)  
+- Configured **GitHub Actions** workflow to ensure production-readiness:  
+  - Runs automated tests **on every push** and on a **weekly schedule**.  
+  - Validates **live Render deployment**, not just local code.  
+
+- **Coverage includes**:  
+  - Endpoint availability.  
+  - Input normalisation → output consistency with CLI.  
+  - Condition ranking correctness.  
+
+- Guarantees the deployed API remains **stable, reliable, and recruiter-ready**.  
+
+---
+
+## Reflections  
+- Wrapping the CLI in FastAPI demonstrated **modularity and scalability**.  
+- Render deployment provided a **public-facing, production-ready demo**.  
+- GitHub Actions CI/CD introduced **DevOps practices**, ensuring reliability over time — a key differentiator from typical student projects.  
+- Together, these steps transformed the project from a local CLI script into a **professionally deployed, continuously validated web service**.  
 
 ---

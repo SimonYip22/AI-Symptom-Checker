@@ -16,6 +16,22 @@ This project laid the foundation for my MSc final project — a fully deployed *
 
 ---
 
+## CLI vs FastAPI: Skills Showcase
+
+| Feature | CLI (v1) | FastAPI (v2 - Live on Render) |
+|---------|-----|--------------------------|
+| **User Interaction** | Command-line symptom entry; interactive prompts | JSON API requests (`POST /predict`, `GET /health`); accessible via Swagger UI |
+| **Data Entry** | Manual typing via terminal | Scriptable input via HTTP requests or programmatic integration |
+| **Input Handling** | Normalises lay terms via aliases; prompts user interactively | Accepts JSON array of symptoms; validates via Pydantic |
+| **Output** | Ranked conditions with weighted scores, matched symptoms, likely diagnosis and advice; immediate terminal feedback | JSON responses with condition scores, matched symptoms, likely diagnosis, and advice; usable in dashboards, ML pipelines, or automated workflows |
+| **Deployment** | Local only | Live on Render; recruiter-accessible demo |
+| **Modularity** | CLI logic in single script | CLI and API code modularly separated for maintainability |
+| **Testing & CI/CD** | Pytest manual testing of scoring logic | Automated Pytest + httpx validating live API endpoints; GitHub Actions ensures continuous validation and production-ready deployment |
+| **Clinical Insight** | Symptom-condition mappings encoded via clinical reasoning | Enables integration into web apps, dashboards, and future AI/ML models |
+| **Explainability** | Shows contribution of each symptom to condition score in console | Structured JSON output retains transparency; API facilitates analytics or logging |
+
+---
+
 ## Design Choices
 - **Clinician–Technologist Insight**: Encodes reasoning that usually stays tacit in a doctor’s mind, creating outputs that are interpretable and clinically meaningful, not just algorithmically correct.
 - **Condition Scope**: Limited to initial clinically-relevant conditions for clarity and demonstration.
