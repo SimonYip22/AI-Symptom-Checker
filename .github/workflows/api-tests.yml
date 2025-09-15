@@ -31,4 +31,4 @@ jobs:
 
       - name: Run Live API tests (optional)
         if: github.event_name == 'schedule'
-        run: pytest -v v2_api/test_live_api.py
+        run: RUN_LIVE=true pytest -v v2_api/test_api_endpoints.py
