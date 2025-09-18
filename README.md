@@ -1,4 +1,4 @@
-# 𝐁𝐮𝐢𝐥𝐝𝐢𝐧𝐠 𝐚 𝐑𝐮𝐥𝐞-𝐁𝐚𝐬𝐞𝐝 𝐏𝐲𝐭𝐡𝐨𝐧 𝐀𝐈 𝐒𝐲𝐦𝐩𝐭𝐨𝐦 𝐂𝐡𝐞𝐜𝐤𝐞𝐫 🧠🤖
+# 𝐁𝐮𝐢𝐥𝐝𝐢𝐧𝐠 𝐚 𝐑𝐮𝐥𝐞-𝐁𝐚𝐬𝐞𝐝 𝐏𝐲𝐭𝐡𝐨𝐧 𝐀𝐈 𝐒𝐲𝐦𝐩𝐭𝐨𝐦 𝐂𝐡𝐞𝐜𝐤𝐞𝐫 (𝐂𝐋𝐈 & 𝐅𝐚𝐬𝐭𝐀𝐏𝐈) 🧠🤖
 **Python | Rule-based AI | CLI Tool | FastAPI | Pydantic | JSON Output | Clinically-Informed Logic**
 
 <!-- Tech Stack -->
@@ -155,7 +155,7 @@ A **deployable backend** with API endpoints highlights production-readiness and 
   -	Real-time suggestions and auto-completion.
 -	**External Data Integration**:
   -	Pull real-time disease prevalence data.
-  -	Connect with EHRs for personalized risk assessment.
+  -	Connect with EHRs for personalised risk assessment.
 
 ---
 
@@ -165,8 +165,8 @@ A **deployable backend** with API endpoints highlights production-readiness and 
 **Clone repo and run**:
 
 ```bash
-git clone https://github.com/SimonYip22/ai-symptom-checker.git
-cd ai-symptom-checker
+git clone https://github.com/SimonYip22/AI-Symptom-Checker.git
+cd AI-Symptom-Checker
 python ai_symptom_checker.py 
 ```
 
@@ -386,7 +386,7 @@ pytest -v
 ## Project Structure
 
 ```text
-ai-symptom-checker/
+AI-Symptom-Checker/
 ├── .github/
 │   └── workflows/
 │       ├── api-tests.yml 
