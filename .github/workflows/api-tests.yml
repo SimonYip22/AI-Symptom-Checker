@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"   # safer than 3.13 for FastAPI
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -29,6 +29,12 @@ jobs:
       - name: Run API tests (local with TestClient)
         run: pytest -v v2_api/test_api_endpoints.py
 
-      - name: Run Live API tests (optional)
+      - name: Warm up Render API
         if: github.event_name == 'schedule'
-        run: RUN_LIVE=true pytest -v v2_api/test_api_endpoints.py
+        run: curl -s https://your-render-api.onrender.com/health || true
+
+      - name: Run Live API tests (Render)
+        if: github.event_name == 'schedule'
+        env:
+          RUN_LIVE: "true"
+        run: pytest -v v2_api/test_api_endpoints.py
